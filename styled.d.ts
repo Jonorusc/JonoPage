@@ -26,6 +26,10 @@ declare module 'styled-components' {
         large: string
         xlarge: string
       }
+      bold: number
+      semiBold: number
+      light: number
+      normal: number
     }
     border: {
       radius: string
