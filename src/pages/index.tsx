@@ -1,7 +1,9 @@
+import { Container } from '@/components/Container'
+
 const Home = () => {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Container>Hello World!</Container>
     </div>
   )
 }
