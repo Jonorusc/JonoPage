@@ -24,7 +24,11 @@ export const defaultTheme: DefaultTheme = {
       medium: '2.4rem',
       large: '3.2rem',
       xlarge: '4rem'
-    }
+    },
+    bold: 700,
+    semiBold: 600,
+    light: 500,
+    normal: 400
   },
   border: {
     radius: '3rem'
@@ -47,4 +51,4 @@ export const defaultTheme: DefaultTheme = {
     large: '2.4rem',
     xlarge: '13rem'
   }
-}
+} as const
