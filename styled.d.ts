@@ -1,23 +1,52 @@
 // styled.d.ts
 import 'styled-components'
-interface IPalette {
-  main: string
-  contrastText: string
-}
-
 declare module 'styled-components' {
   export interface DefaultTheme {
     name: string
-    borderRadius: string
     bodyColor: string
-    textColor: string
+    containerMaxWidth: string
+    htmlFontSize: string
     palette: {
-      common: {
-        black: string
-        white: string
+      primary: string
+      secondary: string
+      green: string
+      dark: string
+      lightGreen: string
+      grey: string
+      darker: string
+      darkenBlue: string
+      whiteSmoke: string
+      black: string
+    }
+    font: {
+      family: string
+      size: {
+        small: string
+        medium: string
+        large: string
+        xlarge: string
       }
-      primary: IPalette
-      secondary: IPalette
+    }
+    border: {
+      radius: string
+    }
+    shadow: {
+      text: {
+        small: string
+        medium: string
+        large: string
+      }
+      box: {
+        small: string
+        medium: string
+        large: string
+      }
+    }
+    spacing: {
+      small: string
+      medium: string
+      large: string
+      xlarge: string
     }
   }
 }
