@@ -52,5 +52,12 @@ declare module 'styled-components' {
       large: string
       xlarge: string
     }
+    layers: {
+      base: number
+      menu: number
+      overlay: number
+      modal: number
+      alwaysOnTop: number
+    }
   }
 }
