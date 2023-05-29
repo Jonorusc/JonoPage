@@ -50,5 +50,12 @@ export const defaultTheme: DefaultTheme = {
     medium: '1.6rem',
     large: '2.4rem',
     xlarge: '13rem'
+  },
+  layers: {
+    base: 10,
+    menu: 20,
+    overlay: 30,
+    modal: 40,
+    alwaysOnTop: 50
   }
 }

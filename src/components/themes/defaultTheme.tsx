@@ -18,7 +18,7 @@ export const defaultTheme: DefaultTheme = {
     black: '#000000'
   },
   font: {
-    family: 'Inter, sans-serif',
+    family: 'K2D, inter ,sans-serif',
     size: {
       small: '1.2rem',
       medium: '2.4rem',
@@ -50,5 +50,12 @@ export const defaultTheme: DefaultTheme = {
     medium: '1.6rem',
     large: '2.4rem',
     xlarge: '13rem'
+  },
+  layers: {
+    base: 10,
+    menu: 20,
+    overlay: 30,
+    modal: 40,
+    alwaysOnTop: 50
   }
 } as const
