@@ -9,7 +9,7 @@ export type NavBarProps = {
 const NavBar = ({ img, dark = false }: NavBarProps) => {
   const [isActiveToggler, setIsActiveToggler] = useState(false)
 
-  const togglerOnClickHundler = () => setIsActiveToggler(!isActiveToggler)
+  const togglerOnClickHandler = () => setIsActiveToggler(!isActiveToggler)
 
   return (
     <S.Wrapper isDark={dark}>
@@ -20,15 +20,15 @@ const NavBar = ({ img, dark = false }: NavBarProps) => {
         <S.Title>Jaum.lu</S.Title>
       </S.Flex>
 
-      <S.Flex>
+      <S.Menu mobileViewPort={isActiveToggler}>
         <S.MenuText isActive={true}>Home</S.MenuText>
         <S.MenuText>About</S.MenuText>
         <S.MenuText>Projects</S.MenuText>
         <S.MenuText>Contact</S.MenuText>
-      </S.Flex>
+      </S.Menu>
 
       <S.TogglerButton
-        onClick={togglerOnClickHundler}
+        onClick={togglerOnClickHandler}
         isActive={isActiveToggler}
       >
         <S.TogglerLine />
