@@ -1,13 +1,19 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div<{ isDark?: boolean }>`
+export const Wrapper = styled.nav<{ isDark?: boolean }>`
   ${({ theme, isDark }) => css`
     display: flex;
+    position: fixed;
+    top: ${theme.spacing.medium};
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 107.3rem;
     align-items: center;
     justify-content: space-between;
     height: 6rem;
     padding: 0 calc(${theme.spacing.xlarge} - 7rem);
     user-select: none;
+    z-index: ${theme.layers.alwaysOnTop};
     /* background */
     background: linear-gradient(
       266.21deg,
@@ -25,6 +31,12 @@ export const Wrapper = styled.div<{ isDark?: boolean }>`
 
     @media screen and (max-width: 768px) {
       padding: 0 ${theme.spacing.medium};
+      width: 95%;
+    }
+
+    /* tablet */
+    @media screen and (max-width: 1024px) {
+      width: 95%;
     }
   `};
 `
@@ -80,6 +92,27 @@ export const Title = styled.h1`
   `};
 `
 
+export const Menu = styled(Flex)<{ mobileViewPort?: boolean }>`
+  ${({ theme, mobileViewPort }) => css`
+    transition: all 0.5s ease-in-out;
+    z-index: ${theme.layers.menu};
+    /* mobile */
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      top: -100vh;
+      ${mobileViewPort &&
+      css`
+        top: calc(${theme.spacing.medium} + 6rem);
+      `};
+    }
+    /* small mobile */
+    @media screen and (max-width: 320px) {
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  `};
+`
+
 export const MenuText = styled.span<{
   isActive?: boolean
 }>`
@@ -99,9 +132,9 @@ export const MenuText = styled.span<{
       border-bottom: 2px solid ${theme.palette.lightGreen};
     `};
 
-    /* mobile */
-    @media screen and (max-width: 768px) {
-      display: none;
+    /* small mobile */
+    @media screen and (max-width: 320px) {
+      font-size: calc(${theme.font.size.small} + 0.5rem);
     }
   `};
 `
@@ -122,6 +155,7 @@ export const TogglerButton = styled.button<{
     outline: none;
     border: none;
     background-color: transparent;
+    z-index: ${theme.layers.alwaysOnTop};
 
     /* mobile */
     @media screen and (max-width: 768px) {
