@@ -10,7 +10,8 @@ const meta: Meta<typeof NavBar> = {
     }
   },
   args: {
-    img: 'https://random.imagecdn.app/500/150'
+    img: 'https://random.imagecdn.app/500/150',
+    brand: 'DevByLucas'
   }
 }
 
