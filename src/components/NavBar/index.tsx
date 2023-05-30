@@ -1,12 +1,8 @@
 import { useState } from 'react'
 import * as S from './styles'
+import { NavBarProps } from '@/types/navbar'
 
-export type NavBarProps = {
-  img: string
-  dark?: boolean
-}
-
-const NavBar = ({ img, dark = false }: NavBarProps) => {
+const NavBar = ({ img, brand, dark = false }: NavBarProps) => {
   const [isActiveToggler, setIsActiveToggler] = useState(false)
 
   const togglerOnClickHandler = () => setIsActiveToggler(!isActiveToggler)
@@ -17,7 +13,7 @@ const NavBar = ({ img, dark = false }: NavBarProps) => {
         <S.ImageBox>
           <img src={img} alt="User Profile Picture" />
         </S.ImageBox>
-        <S.Title>Jaum.lu</S.Title>
+        <S.Title>{brand}</S.Title>
       </S.Flex>
 
       <S.Menu mobileViewPort={isActiveToggler}>
