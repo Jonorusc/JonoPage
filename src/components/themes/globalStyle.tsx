@@ -1,11 +1,57 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=K2D:wght@200;400;500;600;700&display=swap');
+  @font-face {
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('K2D Light'), local('K2D-Light'),
+        url('/fonts/K2D-Light.woff2') format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('K2D Regular'), local('K2D-Regular'),
+        url('/fonts/K2D-Regular.woff2') format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('K2D Medium'), local('K2D-Medium'),
+        url('/fonts/K2D-Medium.woff2') format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('K2D SemiBold'), local('K2D-SemiBold'),
+        url('/fonts/K2D-SemiBold.woff2') format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('K2D Bold'), local('K2D-Bold'),
+        url('/fonts/K2D-Bold.woff2') format('woff2');
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
