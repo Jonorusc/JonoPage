@@ -1,6 +1,6 @@
-export type TagsInputProps = {
+export type TagsInputProps<T extends (tags: string[]) => void> = {
   initialTags: string[]
-  onChange: (tags: string[]) => void
+  onChange: T
   setTags?: (tags: string[]) => void
   placeholder: string
   disabled?: boolean
