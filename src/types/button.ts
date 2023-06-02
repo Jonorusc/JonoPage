@@ -4,7 +4,7 @@ import { FontSizeTypes, FontWeightTypes } from '@/types/font'
 
 export type ButtonProps = {
   text: string
-  icon?: ReactElement
+  icon?: ReactElement | null
   iconPosition?: 'left' | 'right'
   bgColor?: Colors
   color?: Colors
