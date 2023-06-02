@@ -1,0 +1,11 @@
+export type Colors =
+  | 'primary'
+  | 'secondary'
+  | 'green'
+  | 'dark'
+  | 'lightGreen'
+  | 'grey'
+  | 'darker'
+  | 'darkenBlue'
+  | 'whiteSmoke'
+  | 'black'
