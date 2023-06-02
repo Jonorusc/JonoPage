@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from 'react'
+import React, { useState } from 'react'
 import { TagsInputProps } from '@/types/tagsinput'
 import verifyTagLink from '@/utils/verifyTagLink'
 
@@ -63,7 +63,7 @@ const TagsInput = <T extends (tags: string[]) => void>({
     onChange(newTags)
   }
 
-  const icons: { [key: string]: ReactElement } = {
+  const icons = {
     instagram: <FaInstagram />,
     twitter: <FaTwitter />,
     linkedin: <FaLinkedin />,
