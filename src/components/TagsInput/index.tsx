@@ -15,12 +15,12 @@ import {
   FaWindowClose
 } from 'react-icons/fa'
 
-const TagsInput = ({
+const TagsInput = <T extends (tags: string[]) => void>({
   initialTags,
   onChange,
   placeholder,
   disabled = false
-}: TagsInputProps) => {
+}: TagsInputProps<T>) => {
   const [inputValue, setInputValue] = useState('')
   const [tags, setTags] = useState<string[]>(initialTags)
 
