@@ -15,12 +15,13 @@ export const defaultTheme: DefaultTheme = {
     darker: '#141C22',
     darkenBlue: '#194B78',
     whiteSmoke: '#f5f5f5',
-    black: '#000000'
+    black: '#000000',
+    error: '#FFCCCC'
   },
   font: {
     family: 'K2D, inter ,sans-serif',
     size: {
-      small: '1.2rem',
+      small: '1.6rem',
       medium: '2.4rem',
       large: '3.2rem',
       xlarge: '4rem'

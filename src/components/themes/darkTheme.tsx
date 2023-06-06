@@ -15,7 +15,8 @@ export const defaultTheme: DefaultTheme = {
     darker: '#141C22',
     darkenBlue: '#194B78',
     whiteSmoke: '#f5f5f5',
-    black: '#000000'
+    black: '#000000',
+    error: '#FFCCCC'
   },
   font: {
     family: 'Inter, sans-serif',

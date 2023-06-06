@@ -17,6 +17,7 @@ declare module 'styled-components' {
       darkenBlue: string
       whiteSmoke: string
       black: string
+      error: string
     }
     font: {
       family: string
