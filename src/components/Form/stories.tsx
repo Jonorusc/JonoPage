@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Form from '.'
 import Input from '@/components/Input'
+import { InputValue } from '@/types/form'
 import { action } from '@storybook/addon-actions'
 
 const meta: Meta<typeof Form> = {
@@ -9,14 +10,22 @@ const meta: Meta<typeof Form> = {
   args: {
     onSubmit: (
       e?: React.FormEvent<HTMLFormElement>,
-      formValues?: { [key: string]: string }
+      formValues?: InputValue
     ) => {
       action('onSubmit')(e, formValues)
+    },
+    onReset: (
+      e?: React.FormEvent<HTMLFormElement>,
+      formValues?: InputValue
+    ) => {
+      action('onReset')(e, formValues)
     },
     inputValues: {
       name: 'John Doe',
       password: '123456'
-    }
+    },
+    resetName: 'Cancel',
+    submitName: 'Login'
   }
 }
 
