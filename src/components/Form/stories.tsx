@@ -20,10 +20,6 @@ const meta: Meta<typeof Form> = {
     ) => {
       action('onReset')(e, formValues)
     },
-    inputValues: {
-      name: 'John Doe',
-      password: '123456'
-    },
     resetName: 'Cancel',
     submitName: 'Login'
   }

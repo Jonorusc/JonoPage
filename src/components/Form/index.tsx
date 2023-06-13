@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { FormProps, ChildrenProps, InputValue } from '@/types/form'
-import { InputProps, EventType } from '@/types/input'
+import { InputProps } from '@/types/input'
 import * as S from './styles'
 import Button from '@/components/Button'
 
@@ -10,25 +10,56 @@ const Form = ({
   onReset,
   children,
   resetName = 'Reset',
-  submitName = 'Submit',
-  inputValues = {}
+  submitName = 'Submit'
 }: FormProps) => {
   const onResetAvailable = !!onReset && typeof onReset === 'function'
-  const [formValues, setFormValues] = useState<InputValue>(inputValues)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [formValues, setFormValues] = useState<InputValue>({})
 
-  const handleInputChange = (name: string, value: string) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value
-    }))
-  }
-
-  const handleFormSubmit = (event: React.MouseEvent<any, MouseEvent>) => {
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    onSubmit(event, formValues)
+    if (formRef.current) {
+      const childType = ['text', 'textarea', 'password', 'email']
+
+      const InputComponentsName = (children: ChildrenProps): string[] => {
+        const names: string[] = []
+
+        React.Children.forEach(children, (child) => {
+          if (
+            React.isValidElement<InputProps<any>>(child) &&
+            childType.includes(child.props.type)
+          ) {
+            names.push(child.props.name)
+          } else if (
+            React.isValidElement(child) &&
+            React.Children.count(child.props.children) > 0
+          ) {
+            const updatedChildren = InputComponentsName(child.props.children)
+            names.push(...updatedChildren)
+          }
+        })
+
+        return names
+      }
+
+      const inputNames = InputComponentsName(children)
+      const elements = formRef.current.elements as HTMLFormControlsCollection
+
+      const dataObject = Array.from(elements).reduce(
+        (acc: InputValue, element: any) => {
+          if (inputNames.includes(element.id)) {
+            acc[element.id] = element.value
+          }
+          return acc
+        },
+        {}
+      )
+      setFormValues(dataObject)
+      onSubmit(event, dataObject)
+    }
   }
 
-  const handleFormReset = (event: React.MouseEvent<any, MouseEvent>) => {
+  const handleFormReset = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     // sets the form values to empty strings
     const emptyFormValues = Object.keys(formValues).reduce(
@@ -36,59 +67,23 @@ const Form = ({
       {}
     )
     setFormValues(emptyFormValues)
-    console.log(formValues)
+    // reset form
+    if (formRef.current) {
+      const elements = formRef.current.elements as HTMLFormControlsCollection
+      Array.from(elements).forEach((element: any) => (element.value = ''))
+    }
+
     if (onResetAvailable) {
       onReset(event, emptyFormValues)
     }
   }
 
-  const scrapeInputComponents = (
-    child: React.ReactElement<InputProps<any>>
-  ) => {
-    const { name } = child.props
-    return React.cloneElement(child, {
-      key: name,
-      value: formValues[name] || '',
-      onInputChange: (event: EventType) =>
-        handleInputChange(name, event.target.value)
-    })
-  }
-
-  const elements = (children: ChildrenProps): React.ReactNode => {
-    return React.Children.map(children, (child) => {
-      const childType = ['text', 'textarea', 'password', 'email']
-      if (
-        React.isValidElement<InputProps<any>>(child) &&
-        childType.includes(child.props.type)
-      ) {
-        return scrapeInputComponents(child)
-      } else if (
-        /* 
-          
-          Check if the element has children and if the children are of type Input
-          All this is for the purpose of controlling the state of the input components
-          so if you add any element and one is of type Input (more especifically Input component InputProps), it will be controlled
-        
-        */
-        React.isValidElement(child) &&
-        React.Children.count(child.props.children) > 0
-      ) {
-        const updatedChildren = elements(child.props.children)
-        return React.cloneElement(child, child.props, updatedChildren)
-      } else {
-        return child
-      }
-    })
-  }
-
   return (
-    <S.Form>
-      {elements(children)}
+    <S.Form ref={formRef} onReset={handleFormReset} onSubmit={handleFormSubmit}>
+      {children}
       <S.FormButtons>
-        {onResetAvailable ? (
-          <Button onClick={handleFormReset} text={resetName} />
-        ) : null}
-        <Button onClick={handleFormSubmit} text={submitName} />
+        {onResetAvailable ? <Button type="reset" text={resetName} /> : null}
+        <Button type="submit" text={submitName} />
       </S.FormButtons>
     </S.Form>
   )
