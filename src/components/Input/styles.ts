@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { InputProps, EventType } from '@/types/input'
-import { FontSizeTypes } from '@/types/font'
 
 type PropsType = Pick<
   InputProps<(event?: EventType) => void>,
@@ -18,6 +17,7 @@ const inputBaseStyles = css`
     padding: ${theme.spacing.small} ${theme.spacing.medium};
     border-radius: ${theme.border.radius};
     font-family: ${theme.font.family};
+    box-sizing: border-box;
     &:focus {
       border: 1px solid ${theme.palette.primary};
     }
