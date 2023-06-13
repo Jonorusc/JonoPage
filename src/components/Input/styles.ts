@@ -19,7 +19,7 @@ const inputBaseStyles = css`
     font-family: ${theme.font.family};
     box-sizing: border-box;
     &:focus {
-      border: 1px solid ${theme.palette.primary};
+      outline: 0.1rem dashed ${theme.palette.darkenBlue};
     }
   `};
 `
@@ -56,6 +56,8 @@ export const Textarea = styled.textarea<PropsType>`
       ? theme.palette.error
       : theme.palette.lightGreen};
 
+    overflow: auto;
+
     &::-webkit-scrollbar {
       width: 0.5rem;
     }
@@ -65,12 +67,12 @@ export const Textarea = styled.textarea<PropsType>`
     }
 
     &::-webkit-scrollbar-thumb {
-      background: ${theme.palette.grey};
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
       background: ${theme.palette.darkenBlue};
     }
+
+    /* &::-webkit-scrollbar-thumb:hover {
+      background: ${theme.palette.darkenBlue};
+    } */
 
     &::placeholder {
       color: ${hasError ? theme.palette.darkenBlue : theme.palette.darkenBlue};
