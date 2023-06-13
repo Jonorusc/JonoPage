@@ -13,7 +13,10 @@ const meta: Meta<typeof Form> = {
     ) => {
       action('onSubmit')(e, formValues)
     },
-    onReset: action('onReset')
+    inputValues: {
+      name: 'John Doe',
+      password: '123456'
+    }
   }
 }
 
