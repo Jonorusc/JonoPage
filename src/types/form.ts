@@ -25,5 +25,4 @@ export type FormProps = {
   children: ChildrenProps
   resetName?: string
   submitName?: string
-  inputValues?: InputValue
 }
