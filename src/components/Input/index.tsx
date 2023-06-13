@@ -24,7 +24,7 @@ const Input = <T extends (event?: EventType) => void>({
       target.style.height = 'auto'
       target.style.height = `${target.scrollHeight}px`
     }
-    !!onInputChange && onInputChange(e)
+    !!onInputChange && typeof onInputChange === 'function' && onInputChange(e)
   }
 
   if (type === 'textarea') {
