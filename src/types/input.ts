@@ -12,7 +12,7 @@ export type InputProps<T extends (event?: EventType) => void | null> = {
   placeholder?: string
   value?: InputValue
   type: 'text' | 'email' | 'password' | 'textarea'
-  onInputChange: T
+  onInputChange?: T
   name: string
   fontSize: FontSizeTypes
 }
