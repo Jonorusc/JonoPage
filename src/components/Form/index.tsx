@@ -11,10 +11,13 @@ const Form = ({
   onReset,
   children,
   resetName = 'Reset',
-  submitName = 'Submit'
+  submitName = 'Submit',
+  inputValues = {}
 }: FormProps) => {
   const onResetAvailable = !!onReset && typeof onReset === 'function'
-  const [formValues, setFormValues] = useState<{ [key: string]: string }>({})
+  const [formValues, setFormValues] = useState<{ [key: string]: string }>(
+    inputValues
+  )
 
   const handleInputChange = (name: string, value: string) => {
     setFormValues((prevValues) => ({
