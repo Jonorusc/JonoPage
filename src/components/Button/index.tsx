@@ -9,16 +9,22 @@ const Button = ({
   fontSize = 'medium',
   fontWeight = 'normal',
   icon = null,
-  iconPosition = 'right'
+  iconPosition = 'right',
+  type = 'button'
 }: ButtonProps) => {
+  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    !!onClick && typeof onClick === 'function' && onClick(event)
+  }
+
   return (
     <S.Wrapper
       bgColor={bgColor}
       color={color}
       fontSize={fontSize}
       fontWeight={fontWeight}
-      onClick={onClick}
+      onClick={handleOnClick}
       icon={icon}
+      type={type}
     >
       {!!icon && <S.Icon iconPosition={iconPosition}>{icon}</S.Icon>}
       <S.Text iconPosition={iconPosition}>{text}</S.Text>
