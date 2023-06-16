@@ -57,6 +57,21 @@ const meta: Meta<typeof Text> = {
       control: {
         type: 'boolean'
       }
+    },
+    m: {
+      type: 'string'
+    },
+    mt: {
+      type: 'string'
+    },
+    mb: {
+      type: 'string'
+    },
+    mr: {
+      type: 'string'
+    },
+    ml: {
+      type: 'string'
     }
   },
   args: {
@@ -67,7 +82,12 @@ const meta: Meta<typeof Text> = {
     iconPosition: 'left',
     gap: '0.5rem',
     isTitle: false,
-    uppercase: false
+    uppercase: false,
+    m: '',
+    mt: '',
+    mb: '',
+    mr: '',
+    ml: ''
   }
 }
 

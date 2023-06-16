@@ -8,6 +8,11 @@ const Text = ({
   iconPosition = 'left',
   gap = '0.5rem',
   uppercase = false,
+  m = '',
+  mt = '',
+  mb = '',
+  mr = '',
+  ml = '',
   children
 }: TextProps) => {
   if (!children) return null
@@ -18,6 +23,11 @@ const Text = ({
       color={color}
       isTitle={isTitle}
       gap={gap}
+      m={m}
+      mt={mt}
+      mb={mb}
+      mr={mr}
+      ml={ml}
       uppercase={uppercase}
     >
       <S.Text dangerouslySetInnerHTML={{ __html: children }} />

@@ -3,14 +3,39 @@ import { TextProps } from '@/types/text'
 
 type WrapperProps = Omit<TextProps, 'children' | 'icon' | 'iconPosition'>
 
-export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, size, color, isTitle, gap, uppercase }) => css`
+export const Wrapper = styled.span<WrapperProps>`
+  ${({ theme, size, color, isTitle, gap, uppercase, m, mt, mb, ml, mr }) => css`
     display: flex;
     align-items: center;
     column-gap: ${gap};
     font-size: ${theme.font.size.small};
     text-transform: ${uppercase ? 'uppercase' : 'auto'};
     font-weight: ${isTitle ? theme.font.bold : theme.font.normal};
+    /* margins */
+    ${!!m &&
+    css`
+      margin: ${m};
+    `}
+
+    ${!!mt &&
+    css`
+      margin-top: ${mt};
+    `};
+
+    ${!!mb &&
+    css`
+      margin-bottom: ${mb};
+    `};
+
+    ${!!ml &&
+    css`
+      margin-left: ${ml};
+    `};
+
+    ${!!mr &&
+    css`
+      margin-right: ${mr};
+    `};
 
     /* just to guarantee in case of removing size prop from compoenent*/
     ${!!size &&

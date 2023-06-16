@@ -9,6 +9,11 @@ export type TextProps = {
   color: Colors
   isTitle?: boolean
   uppercase?: boolean
+  m?: string
+  mt?: string
+  mb?: string
+  mr?: string
+  ml?: string
   gap?: string
   children: string | HTMLElement
 }
