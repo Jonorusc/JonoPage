@@ -1,10 +1,14 @@
-import { SpaProps } from '@/types/spa'
+import Template from '@/templates/Admin/AddProject'
+import { InputValue, FormEvent } from '@/types/form'
 
-const AddProject = (props: SpaProps) => {
+const AddProject = () => {
+  const onSubmit = (e: FormEvent, formValues: InputValue) => {
+    console.log(e, formValues)
+  }
   return (
-    <div>
-      <>Add project</>
-    </div>
+    <main>
+      <Template onSubmit={onSubmit} />
+    </main>
   )
 }
 
