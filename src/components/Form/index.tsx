@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react'
 import { FormProps, ChildrenProps, InputValue } from '@/types/form'
 import { InputProps } from '@/types/input'
+import { FileProps, EventType, ImageObject } from '@/types/file'
 import * as S from './styles'
 import Button from '@/components/Button'
 
@@ -83,7 +84,7 @@ const Form = ({
       {children}
       <S.FormButtons>
         {onResetAvailable ? <Button type="reset" text={resetName} /> : null}
-        <Button type="submit" text={submitName} />
+        <Button type="submit" text={submitName} bgcolor="secondary" />
       </S.FormButtons>
     </S.Form>
   )

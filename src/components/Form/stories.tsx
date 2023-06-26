@@ -8,16 +8,10 @@ const meta: Meta<typeof Form> = {
   title: 'Form',
   component: Form,
   args: {
-    onSubmit: (
-      e?: React.FormEvent<HTMLFormElement>,
-      formValues?: InputValue
-    ) => {
+    onSubmit: (e: React.FormEvent<HTMLFormElement>, formValues: InputValue) => {
       action('onSubmit')(e, formValues)
     },
-    onReset: (
-      e?: React.FormEvent<HTMLFormElement>,
-      formValues?: InputValue
-    ) => {
+    onReset: (e: React.FormEvent<HTMLFormElement>, formValues: InputValue) => {
       action('onReset')(e, formValues)
     },
     resetName: 'Cancel',
