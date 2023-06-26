@@ -9,3 +9,4 @@ export type Colors =
   | 'darkenBlue'
   | 'whiteSmoke'
   | 'black'
+  | 'error'
