@@ -7,12 +7,12 @@ export type EventType = React.ChangeEvent<
 type InputValue = string | number
 
 export type InputProps<T extends (event?: EventType) => void | null> = {
-  hasError?: boolean
-  isDisabled?: boolean
+  haserror?: boolean
+  isdisabled?: boolean
   placeholder?: string
   value?: InputValue
   type: 'text' | 'email' | 'password' | 'textarea'
   onInputChange?: T
   name: string
-  fontSize: FontSizeTypes
+  fontSize?: FontSizeTypes
 }
