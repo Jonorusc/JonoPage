@@ -3,7 +3,7 @@ import { InputProps, EventType } from '@/types/input'
 
 type PropsType = Pick<
   InputProps<(event?: EventType) => void>,
-  'hasError' | 'fontSize'
+  'haserror' | 'fontSize'
 >
 
 const inputBaseStyles = css`
@@ -12,7 +12,7 @@ const inputBaseStyles = css`
     border: none;
     outline: none;
     min-width: 30rem;
-    height: 4rem;
+    height: 4.5rem;
     color: ${theme.palette.darkenBlue};
     padding: ${theme.spacing.small} ${theme.spacing.medium};
     border-radius: ${theme.border.radius};
@@ -25,34 +25,34 @@ const inputBaseStyles = css`
 `
 
 export const Input = styled.input<PropsType>`
-  ${({ theme, hasError, fontSize }) => css`
-    background-color: ${hasError
+  ${({ theme, haserror, fontSize }) => css`
+    background-color: ${haserror
       ? theme.palette.error
       : theme.palette.lightGreen};
 
-    font-size: ${theme.font.size[fontSize]};
+    font-size: ${theme.font.size[fontSize!]};
     line-height: 1rem;
 
     ${inputBaseStyles}
 
     &::placeholder {
-      color: ${hasError ? theme.palette.darkenBlue : theme.palette.darkenBlue};
+      color: ${haserror ? theme.palette.darkenBlue : theme.palette.darkenBlue};
     }
   `};
 `
 
 export const Textarea = styled.textarea<PropsType>`
-  ${({ theme, hasError, fontSize }) => css`
-    font-size: ${theme.font.size[fontSize]};
+  ${({ theme, haserror, fontSize }) => css`
+    font-size: ${theme.font.size[fontSize!]};
 
     ${inputBaseStyles}
     resize: none;
     min-width: 30rem;
     max-width: 40rem;
-    min-height: 4rem;
+    min-height: 8rem;
     max-height: 17.5rem;
     border-radius: ${theme.border.radius};
-    background-color: ${hasError
+    background-color: ${haserror
       ? theme.palette.error
       : theme.palette.lightGreen};
 
@@ -75,7 +75,7 @@ export const Textarea = styled.textarea<PropsType>`
     } */
 
     &::placeholder {
-      color: ${hasError ? theme.palette.darkenBlue : theme.palette.darkenBlue};
+      color: ${haserror ? theme.palette.darkenBlue : theme.palette.darkenBlue};
     }
   `};
 `

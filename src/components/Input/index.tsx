@@ -4,8 +4,8 @@ import * as S from './styles'
 import { useState, useRef } from 'react'
 
 const Input = <T extends (event?: EventType) => void>({
-  hasError = false,
-  isDisabled = false,
+  haserror = false,
+  isdisabled = false,
   placeholder = '',
   value = '',
   type = 'text',
@@ -33,8 +33,8 @@ const Input = <T extends (event?: EventType) => void>({
       <S.Textarea
         ref={textAreaRef}
         id={name}
-        hasError={hasError}
-        disabled={isDisabled}
+        haserror={haserror ? haserror : undefined}
+        disabled={isdisabled}
         placeholder={placeholder}
         value={inputValue}
         onChange={handleInputChange}
@@ -45,8 +45,8 @@ const Input = <T extends (event?: EventType) => void>({
   return (
     <S.Input
       id={name}
-      hasError={hasError}
-      disabled={isDisabled}
+      haserror={haserror ? haserror : undefined}
+      disabled={isdisabled}
       placeholder={placeholder}
       value={inputValue}
       type={type}

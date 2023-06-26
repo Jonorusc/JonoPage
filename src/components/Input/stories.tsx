@@ -5,8 +5,8 @@ const meta: Meta<typeof Input> = {
   title: 'Input',
   component: Input,
   args: {
-    hasError: false,
-    isDisabled: false,
+    haserror: false,
+    isdisabled: false,
     placeholder: 'placeholder',
     value: 'value',
     type: 'text',
