@@ -15,9 +15,11 @@ export type ChildrenProps =
   | boolean
 
 export type FormCallBackFunction = (
-  e?: React.FormEvent<HTMLFormElement>,
-  formValues?: InputValue
+  e: React.FormEvent<HTMLFormElement>,
+  formValues: InputValue
 ) => void
+
+export type FormEvent = React.FormEvent<HTMLFormElement>
 
 export type FormProps = {
   onSubmit: FormCallBackFunction
