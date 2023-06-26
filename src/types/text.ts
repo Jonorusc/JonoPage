@@ -5,10 +5,10 @@ import { ReactElement } from 'react'
 export type TextProps = {
   size?: FontSizeTypes
   icon?: ReactElement | null
-  iconPosition?: 'left' | 'right'
+  iconposition?: 'left' | 'right'
   color: Colors
-  isTitle?: boolean
-  uppercase?: boolean
+  istitle?: boolean
+  up?: boolean
   m?: string
   mt?: string
   mb?: string
