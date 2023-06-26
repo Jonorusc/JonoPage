@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
   args: {
     text: 'Button',
     onClick: (event) => action('clicked')(event),
-    bgColor: 'darker',
+    bgcolor: 'darker',
     color: 'primary',
     fontSize: 'medium',
     fontWeight: 'normal',

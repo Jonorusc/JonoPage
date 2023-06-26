@@ -5,12 +5,12 @@ import { FontSizeTypes, FontWeightTypes } from '@/types/font'
 
 type WrapperProps = Pick<
   ButtonProps,
-  'bgColor' | 'color' | 'fontSize' | 'fontWeight' | 'icon'
+  'bgcolor' | 'color' | 'fontSize' | 'fontWeight' | 'icon'
 >
 
 const wrapperModifiers = {
-  bgColor: (theme: DefaultTheme, bgColor: Colors) => css`
-    background-color: ${theme.palette[bgColor]};
+  bgcolor: (theme: DefaultTheme, bgcolor: Colors) => css`
+    background-color: ${theme.palette[bgcolor]};
   `,
   color: (theme: DefaultTheme, color: Colors) => css`
     color: ${theme.palette[color]};
@@ -24,7 +24,7 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, bgColor, color, fontSize, fontWeight, icon }) => css`
+  ${({ theme, bgcolor, color, fontSize, fontWeight, icon }) => css`
     border: none;
     border-radius: ${theme.border.radius};
     padding: ${icon ? theme.spacing.small : theme.spacing.medium}
@@ -32,7 +32,7 @@ export const Wrapper = styled.button<WrapperProps>`
     cursor: pointer;
     transition: opacity 0.3s ease-in-out;
 
-    ${!!bgColor && wrapperModifiers.bgColor(theme, bgColor)};
+    ${!!bgcolor && wrapperModifiers.bgcolor(theme, bgcolor)};
     ${!!color && wrapperModifiers.color(theme, color)};
     ${!!fontSize && wrapperModifiers.fontSize(theme, fontSize)};
     ${!!fontWeight && wrapperModifiers.fontWeight(theme, fontWeight)};
@@ -45,26 +45,30 @@ export const Wrapper = styled.button<WrapperProps>`
     &:hover {
       opacity: 0.8;
     }
+
+    &:focus {
+      outline: 0.1rem dashed ${theme.palette.darkenBlue};
+    }
   `};
 `
 
-type IconProps = Pick<ButtonProps, 'iconPosition'>
+type IconProps = Pick<ButtonProps, 'iconposition'>
 
 export const Icon = styled.div<IconProps>`
-  ${({ iconPosition }) => css`
-    margin-right: ${iconPosition === 'right' ? '0' : '0.5rem'};
-    margin-left: ${iconPosition === 'right' ? '0.5rem' : '0'};
-    order: ${iconPosition === 'right' ? '2' : '1'};
+  ${({ iconposition }) => css`
+    margin-right: ${iconposition === 'right' ? '0' : '0.5rem'};
+    margin-left: ${iconposition === 'right' ? '0.5rem' : '0'};
+    order: ${iconposition === 'right' ? '2' : '1'};
     display: grid;
     place-items: center;
   `};
 `
 
 export const Text = styled.span<IconProps>`
-  ${({ iconPosition }) => css`
-    margin-right: ${iconPosition === 'right' ? '0.5rem' : '0'};
-    margin-left: ${iconPosition === 'right' ? '0' : '0.5rem'};
-    order: ${iconPosition === 'right' ? '1' : '2'};
+  ${({ iconposition }) => css`
+    margin-right: ${iconposition === 'right' ? '0.5rem' : '0'};
+    margin-left: ${iconposition === 'right' ? '0' : '0.5rem'};
+    order: ${iconposition === 'right' ? '1' : '2'};
     line-height: 1rem;
   `};
 `

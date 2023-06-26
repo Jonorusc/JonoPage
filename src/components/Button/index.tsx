@@ -4,12 +4,12 @@ import { ButtonProps } from '@/types/button'
 const Button = ({
   text,
   onClick,
-  bgColor = 'darker',
+  bgcolor = 'darker',
   color = 'primary',
   fontSize = 'medium',
   fontWeight = 'normal',
   icon = null,
-  iconPosition = 'right',
+  iconposition = 'right',
   type = 'button'
 }: ButtonProps) => {
   const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,7 +18,7 @@ const Button = ({
 
   return (
     <S.Wrapper
-      bgColor={bgColor}
+      bgcolor={bgcolor}
       color={color}
       fontSize={fontSize}
       fontWeight={fontWeight}
@@ -26,8 +26,8 @@ const Button = ({
       icon={icon}
       type={type}
     >
-      {!!icon && <S.Icon iconPosition={iconPosition}>{icon}</S.Icon>}
-      <S.Text iconPosition={iconPosition}>{text}</S.Text>
+      {!!icon && <S.Icon iconposition={iconposition}>{icon}</S.Icon>}
+      <S.Text iconposition={iconposition}>{text}</S.Text>
     </S.Wrapper>
   )
 }
