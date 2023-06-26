@@ -3,11 +3,11 @@ import { TextProps } from '@/types/text'
 const Text = ({
   size = 'small',
   color,
-  isTitle = false,
+  istitle = false,
   icon = null,
-  iconPosition = 'left',
+  iconposition = 'left',
   gap = '0.5rem',
-  uppercase = false,
+  up = false,
   m = '',
   mt = '',
   mb = '',
@@ -21,17 +21,17 @@ const Text = ({
     <S.Wrapper
       size={size}
       color={color}
-      isTitle={isTitle}
+      istitle={istitle ? istitle : undefined}
       gap={gap}
       m={m}
       mt={mt}
       mb={mb}
       mr={mr}
       ml={ml}
-      uppercase={uppercase}
+      up={up ? up : undefined}
     >
       <S.Text dangerouslySetInnerHTML={{ __html: children }} />
-      {icon ? <S.Icon iconPosition={iconPosition}>{icon}</S.Icon> : null}
+      {icon ? <S.Icon iconposition={iconposition}>{icon}</S.Icon> : null}
     </S.Wrapper>
   )
 }

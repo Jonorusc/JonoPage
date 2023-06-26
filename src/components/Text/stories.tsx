@@ -39,7 +39,7 @@ const meta: Meta<typeof Text> = {
         options: [null]
       }
     },
-    iconPosition: {
+    iconposition: {
       control: {
         type: 'select',
         options: ['left', 'right']
@@ -50,10 +50,10 @@ const meta: Meta<typeof Text> = {
         type: 'string'
       }
     },
-    isTitle: {
+    istitle: {
       type: 'boolean'
     },
-    uppercase: {
+    up: {
       control: {
         type: 'boolean'
       }
@@ -79,10 +79,10 @@ const meta: Meta<typeof Text> = {
     size: 'small',
     color: 'darker',
     icon: <FaInstagram />,
-    iconPosition: 'left',
+    iconposition: 'left',
     gap: '0.5rem',
-    isTitle: false,
-    uppercase: false,
+    istitle: false,
+    up: false,
     m: '',
     mt: '',
     mb: '',

@@ -4,13 +4,13 @@ import { TextProps } from '@/types/text'
 type WrapperProps = Omit<TextProps, 'children' | 'icon' | 'iconPosition'>
 
 export const Wrapper = styled.span<WrapperProps>`
-  ${({ theme, size, color, isTitle, gap, uppercase, m, mt, mb, ml, mr }) => css`
+  ${({ theme, size, color, istitle, gap, up, m, mt, mb, ml, mr }) => css`
     display: flex;
     align-items: center;
     column-gap: ${gap};
     font-size: ${theme.font.size.small};
-    text-transform: ${uppercase ? 'uppercase' : 'auto'};
-    font-weight: ${isTitle ? theme.font.bold : theme.font.normal};
+    text-transform: ${up ? 'uppercase' : 'auto'};
+    font-weight: ${istitle ? theme.font.bold : theme.font.normal};
     /* margins */
     ${!!m &&
     css`
@@ -46,15 +46,17 @@ export const Wrapper = styled.span<WrapperProps>`
     css`
       color: ${theme.palette[color]};
     `}
+
+    width: fit-content;
   `};
 `
 
-type IconProps = Pick<TextProps, 'iconPosition'>
+type IconProps = Pick<TextProps, 'iconposition'>
 
 export const Icon = styled.div<IconProps>`
-  ${({ iconPosition }) => css`
+  ${({ iconposition }) => css`
     line-height: 1rem;
-    order: ${iconPosition === 'left' ? 0 : 2};
+    order: ${iconposition === 'left' ? 0 : 2};
     color: inherit;
   `};
 `
