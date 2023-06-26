@@ -1,7 +1,7 @@
 import * as S from './styles'
 
-const Admin = () => {
+const Template = () => {
   return <S.Wrapper></S.Wrapper>
 }
 
-export default Admin
+export default Template
