@@ -16,14 +16,18 @@ export type ChildrenProps =
 
 export type FormCallBackFunction = (
   e: React.FormEvent<HTMLFormElement>,
-  formValues: InputValue
+  formValues: InputValue,
+  images?: File[] | undefined
 ) => void
 
 export type FormEvent = React.FormEvent<HTMLFormElement>
 
+export type FormErrorCallbackFunction = (errors: InputValue) => void
+
 export type FormProps = {
   onSubmit: FormCallBackFunction
   onReset?: FormCallBackFunction
+  onError?: FormErrorCallbackFunction
   children: ChildrenProps
   resetName?: string
   submitName?: string
