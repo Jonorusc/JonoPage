@@ -17,7 +17,7 @@ import { FormProps, FormErrorCallbackFunction, InputValue } from '@/types/form'
 
 export type AddProjectTemplateProps = Pick<FormProps, 'onSubmit' | 'onReset'>
 
-const Template = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
+const NewProject = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
   const [formError, setFormError] = useState<InputValue>({})
 
   const onError: FormErrorCallbackFunction = (errors) => setFormError(errors)
@@ -107,4 +107,4 @@ const Template = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
   )
 }
 
-export default Template
+export default NewProject

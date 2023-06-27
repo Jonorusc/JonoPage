@@ -1,4 +1,4 @@
-import Template from '@/templates/Admin/AddProject'
+import NewProject from '@/templates/Admin/AddProject'
 import { InputValue, FormEvent } from '@/types/form'
 
 const AddProject = () => {
@@ -8,7 +8,7 @@ const AddProject = () => {
 
   return (
     <main>
-      <Template onSubmit={onSubmit} />
+      <NewProject onSubmit={onSubmit} />
     </main>
   )
 }
