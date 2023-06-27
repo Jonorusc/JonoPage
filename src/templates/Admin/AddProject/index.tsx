@@ -1,4 +1,6 @@
 import * as S from './styles'
+import { useState } from 'react'
+
 // components
 import Text from '@/components/Text'
 import Link from 'next/link'
@@ -11,50 +13,89 @@ import File from '@/components/File'
 import { FaArrowLeft } from 'react-icons/fa'
 
 // types
-import { FormProps } from '@/types/form'
+import { FormProps, FormErrorCallbackFunction, InputValue } from '@/types/form'
 
 export type AddProjectTemplateProps = Pick<FormProps, 'onSubmit' | 'onReset'>
 
 const Template = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
+  const [formError, setFormError] = useState<InputValue>({})
+
+  const onError: FormErrorCallbackFunction = (errors) => setFormError(errors)
+
+  const checkError = (name: string): boolean => !!formError[name]
+
   return (
     <S.Wrapper>
       <Container padding="4.6rem">
-        <Link href="/admin">
-          <Text color="secondary" icon={<FaArrowLeft />} size="medium">
-            Back to admin
+        <S.FlexColumn>
+          <Link href="/admin">
+            <Text
+              color="secondary"
+              icon={<FaArrowLeft />}
+              size="medium"
+              gap="1rem"
+            >
+              Back to admin
+            </Text>
+          </Link>
+          <Text color="dark" size="medium" mt="2rem">
+            Adding a project
           </Text>
-        </Link>
-        <Text color="dark" size="medium" mt="2rem">
-          Adding a project
-        </Text>
+        </S.FlexColumn>
 
         <S.Section>
-          <Form onSubmit={onSubmit} onReset={onReset} submitName="Save Project">
+          <Form
+            onSubmit={onSubmit}
+            onReset={onReset}
+            onError={onError}
+            submitName="Save Project"
+          >
             <S.Flex gap="4rem">
               <S.FlexColumn gap="2.1rem">
-                <Input name="title" placeholder="Title" type="text" />
+                <Input
+                  name="title"
+                  placeholder={
+                    checkError('title') ? formError.description : 'Title'
+                  }
+                  haserror={checkError('title')}
+                  type="text"
+                  required
+                />
                 <Input
                   name="description"
-                  placeholder="Description"
+                  placeholder={
+                    checkError('description')
+                      ? formError.description
+                      : 'Description'
+                  }
+                  haserror={checkError('description')}
                   type="text"
+                  required
                 />
-                <Input
-                  name="readmemd"
-                  placeholder="Readme.md"
-                  type="textarea"
-                />
+                <Input name="readme" placeholder="Readme.md" type="textarea" />
               </S.FlexColumn>
-              <S.FlexColumn gap="3.4rem">
+              <S.FlexColumn gap="2.1rem">
                 <Input
-                  name="projectSourceCode"
-                  placeholder="Project Source Code"
+                  name="source"
+                  placeholder={
+                    checkError('source')
+                      ? formError.description
+                      : 'Project Source Code'
+                  }
+                  haserror={checkError('source')}
                   type="text"
+                  required
                 />
                 <S.GridCenter>
                   <File
-                    name="projectImages"
+                    name="img"
                     types={['image/png', 'image/jpeg']}
-                    label="Add images"
+                    label={
+                      checkError('img') ? formError.description : 'Add images'
+                    }
+                    haserror={checkError('img')}
+                    multiple={true}
+                    required
                   />
                 </S.GridCenter>
               </S.FlexColumn>

@@ -5,6 +5,7 @@ const AddProject = () => {
   const onSubmit = (e: FormEvent, formValues: InputValue) => {
     console.log(e, formValues)
   }
+
   return (
     <main>
       <Template onSubmit={onSubmit} />
