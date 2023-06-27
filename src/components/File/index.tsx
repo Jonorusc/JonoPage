@@ -7,6 +7,8 @@ const File = <T extends (event?: EventType, images?: File[] | File) => void>({
   types,
   label,
   multiple = false,
+  required = false,
+  haserror = false,
   onInputChange
 }: FileProps<T>) => {
   const [images, setImages] = useState<ImageObject[]>([])
@@ -37,6 +39,7 @@ const File = <T extends (event?: EventType, images?: File[] | File) => void>({
 
   return (
     <S.Label htmlFor={name}>
+      <S.Span {...(haserror && { haserror })}>{label}</S.Span>
       <S.Images>
         <S.Image
           src="/images/add-images.svg"
@@ -63,8 +66,8 @@ const File = <T extends (event?: EventType, images?: File[] | File) => void>({
         id={name}
         name={name}
         onChange={onInputChangeHandler}
+        {...(required && { required })}
       />
-      {label}
       <S.Span>{images.length > 0 ? `${images.length} loaded` : null}</S.Span>
     </S.Label>
   )
