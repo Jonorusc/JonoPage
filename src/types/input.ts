@@ -15,4 +15,5 @@ export type InputProps<T extends (event?: EventType) => void | null> = {
   onInputChange?: T
   name: string
   fontSize?: FontSizeTypes
+  required?: boolean
 }
