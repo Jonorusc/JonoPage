@@ -11,7 +11,8 @@ const Input = <T extends (event?: EventType) => void>({
   type = 'text',
   onInputChange,
   name,
-  fontSize = 'medium'
+  fontSize = 'medium',
+  required = false
 }: InputProps<T>) => {
   const [inputValue, setInputValue] = useState(value)
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
@@ -33,12 +34,13 @@ const Input = <T extends (event?: EventType) => void>({
       <S.Textarea
         ref={textAreaRef}
         id={name}
-        haserror={haserror ? haserror : undefined}
         disabled={isdisabled}
         placeholder={placeholder}
         value={inputValue}
         onChange={handleInputChange}
-        {...(fontSize && { fontSize })}
+        {...(haserror && { haserror })}
+        {...(!!fontSize && { fontSize })}
+        {...(required && { required })}
       />
     )
   }
@@ -50,7 +52,9 @@ const Input = <T extends (event?: EventType) => void>({
       placeholder={placeholder}
       value={inputValue}
       type={type}
-      {...(fontSize && { fontSize })}
+      {...(!!fontSize && { fontSize })}
+      {...(haserror && { haserror })}
+      {...(required && { required })}
       onChange={handleInputChange}
     />
   )
