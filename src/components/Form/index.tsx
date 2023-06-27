@@ -2,20 +2,29 @@
 import React, { useState, useRef } from 'react'
 import { FormProps, ChildrenProps, InputValue } from '@/types/form'
 import { InputProps } from '@/types/input'
-import { FileProps, EventType, ImageObject } from '@/types/file'
+import { FileProps } from '@/types/file'
 import * as S from './styles'
 import Button from '@/components/Button'
 
 const Form = ({
   onSubmit,
   onReset,
+  onError,
   children,
   resetName = 'Reset',
   submitName = 'Submit'
 }: FormProps) => {
   const onResetAvailable = !!onReset && typeof onReset === 'function'
+  const onErrorAvailable = !!onError && typeof onError === 'function'
   const formRef = useRef<HTMLFormElement>(null)
   const [formValues, setFormValues] = useState<InputValue>({})
+
+  // handle the form invalid event
+  const handleFormError = (errors: InputValue) => {
+    if (onErrorAvailable) {
+      onError(errors)
+    }
+  }
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -27,8 +36,9 @@ const Form = ({
 
         React.Children.forEach(children, (child) => {
           if (
-            React.isValidElement<InputProps<any>>(child) &&
-            childType.includes(child.props.type)
+            (React.isValidElement<InputProps<any>>(child) &&
+              childType.includes(child.props.type)) ||
+            (React.isValidElement<FileProps<any>>(child) && child.props.name)
           ) {
             names.push(child.props.name)
           } else if (
@@ -49,13 +59,35 @@ const Form = ({
       const dataObject = Array.from(elements).reduce(
         (acc: InputValue, element: any) => {
           if (inputNames.includes(element.id)) {
-            acc[element.id] = element.value
+            if (element.type === 'file') acc[element.id] = element.files
+            else acc[element.id] = element.value
           }
           return acc
         },
         {}
       )
       setFormValues(dataObject)
+
+      // check if there is any error (required fields)
+      const errorObject = Array.from(elements).reduce(
+        (acc: InputValue, element: any) => {
+          if (
+            (element.required && !element.value) ||
+            (element.requerid && element.files.length === 0)
+          ) {
+            acc[element.id] = 'This field is required'
+          }
+          return acc
+        },
+        {}
+      )
+
+      if (Object.keys(errorObject).length > 0) {
+        handleFormError(errorObject)
+        return
+      }
+
+      handleFormError({})
       onSubmit(event, dataObject)
     }
   }
@@ -80,7 +112,12 @@ const Form = ({
   }
 
   return (
-    <S.Form ref={formRef} onReset={handleFormReset} onSubmit={handleFormSubmit}>
+    <S.Form
+      ref={formRef}
+      onReset={handleFormReset}
+      onSubmit={handleFormSubmit}
+      noValidate
+    >
       {children}
       <S.FormButtons>
         {onResetAvailable ? <Button type="reset" text={resetName} /> : null}
