@@ -8,6 +8,8 @@ export type FileProps<
   label: string
   multiple?: boolean
   onInputChange?: T
+  required?: boolean
+  haserror?: boolean
 }
 
 export type ImageObject = {
