@@ -5,7 +5,8 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
-  User
+  User,
+  onAuthStateChanged
 } from 'firebase/auth'
 
 import { firebaseAppConfig } from '@/utils/firebaseAppConfig'
@@ -22,7 +23,7 @@ export const signInWithGoogle = (): Promise<User> => {
     signInWithPopup(auth, provider)
       .then((result) => {
         // check if user email matches admin_email AUTH_ADMIN_EMAIL
-        if (result.user.email === process.env.AUTH_ADMIN_EMAIL) {
+        if (result.user.email === process.env.NEXT_PUBLIC_AUTH_ADMIN_EMAIL) {
           resolve(result.user)
         } else {
           reject({
@@ -57,6 +58,20 @@ export const signOutUser = (): Promise<string> => {
 }
 
 // Check if a user is currently authenticated
-export const getCurrentUser = (): User | null => {
-  return auth.currentUser
+export const getCurrentUser = (): Promise<User | null> => {
+  return new Promise<User | null>((resolve, reject) => {
+    onAuthStateChanged(
+      auth,
+      (user) => {
+        if (user && user.email === process.env.NEXT_PUBLIC_AUTH_ADMIN_EMAIL) {
+          resolve(user)
+        } else {
+          resolve(null)
+        }
+      },
+      (error) => {
+        reject(error)
+      }
+    )
+  })
 }
