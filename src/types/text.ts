@@ -15,5 +15,5 @@ export type TextProps = {
   mr?: string
   ml?: string
   gap?: string
-  children: string | HTMLElement
+  children: string | string[] | HTMLElement
 }
