@@ -1,4 +1,5 @@
 import NewProject from '@/templates/Admin/AddProject'
+import WithAuth from '@/utils/withAuth'
 import { InputValue, FormEvent } from '@/types/form'
 
 const AddProject = () => {
@@ -7,9 +8,9 @@ const AddProject = () => {
   }
 
   return (
-    <main>
+    <WithAuth>
       <NewProject onSubmit={onSubmit} />
-    </main>
+    </WithAuth>
   )
 }
 
