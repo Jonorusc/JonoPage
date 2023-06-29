@@ -27,15 +27,15 @@ export const signInWithGoogle = (): Promise<User> => {
           resolve(result.user)
         } else {
           reject({
-            message: new Error('You are not authorized to access this app'),
-            error: null
+            message: 'You are not authorized to access this app',
+            error: new Error('User are not authorized to access this content')
           })
         }
       })
       .catch((error) => {
         reject({
-          message: new Error('Error authenticating with Google'),
-          error
+          message: 'Error authenticating with Google',
+          error: new Error(error)
         })
       })
   })
@@ -50,8 +50,8 @@ export const signOutUser = (): Promise<string> => {
       })
       .catch((error) => {
         reject({
-          message: new Error('Error signing out'),
-          error
+          message: 'Error signing out',
+          error: new Error(error)
         })
       })
   })
