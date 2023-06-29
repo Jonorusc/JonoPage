@@ -16,7 +16,7 @@ export const defaultTheme: DefaultTheme = {
     darkenBlue: '#194B78',
     whiteSmoke: '#f5f5f5',
     black: '#000000',
-    error: '#FFCCCC'
+    error: '#ff7474'
   },
   font: {
     family: 'K2D, inter ,sans-serif',
