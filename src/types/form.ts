@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement, ReactNode, JSXElementConstructor } from 'react'
 
-export type InputValue = { [key: string]: string }
+export type InputValue = { [key: string]: string | FileList }
 
 export type ChildrenProps =
   | ReactElement<any, string | JSXElementConstructor<any>>
