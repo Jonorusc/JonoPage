@@ -11,7 +11,7 @@ import {
   deleteDoc,
   getFirestore
 } from 'firebase/firestore'
-import { getStorage, ref, uploadString } from 'firebase/storage'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { firebaseAppConfig } from '@/utils/firebaseAppConfig'
 const app = initializeApp(firebaseAppConfig)
 
@@ -29,10 +29,10 @@ export const createDocument = (
       .then((docRef: any) => {
         resolve(docRef.id)
       })
-      .catch((error: any) => {
+      .catch((error) => {
         reject({
-          message: new Error('Error creating document'),
-          error
+          message: 'Error creating document',
+          error: new Error(error)
         })
       })
   })
@@ -40,9 +40,9 @@ export const createDocument = (
 
 // Create or update a document in Firestore collection
 export const createOrUpdateDocument = (
-  collectionName: string,
-  documentId: string,
-  data: any
+  data: any,
+  collectionName = 'spa',
+  documentId = 'page'
 ): Promise<any> => {
   return new Promise((resolve, reject) => {
     const documentRef = doc(db, collectionName, documentId)
@@ -50,10 +50,10 @@ export const createOrUpdateDocument = (
       .then(() => {
         resolve({ id: documentId, ...data })
       })
-      .catch((error: any) => {
+      .catch((error) => {
         reject({
-          message: new Error('Error creating or updating document'),
-          error
+          message: 'Error creating or updating document',
+          error: new Error(error)
         })
       })
   })
@@ -70,10 +70,10 @@ export const getDocuments = (collectionName: string): Promise<any> => {
         }))
         resolve(documents)
       })
-      .catch((error: any) => {
+      .catch((error) => {
         reject({
-          message: new Error('Error getting documents'),
-          error
+          message: 'Error getting documents',
+          error: new Error(error)
         })
       })
   })
@@ -92,15 +92,15 @@ export const getDocumentById = (
           resolve(document)
         } else {
           reject({
-            message: new Error('Document not found'),
-            error: null
+            message: 'Document not found',
+            error: new Error('Document not found')
           })
         }
       })
-      .catch((error: any) => {
+      .catch((error) => {
         reject({
-          message: new Error('Error getting document'),
-          error
+          message: 'Error getting document',
+          error: new Error(error)
         })
       })
   })
@@ -118,10 +118,10 @@ export const updateDocument = (
       .then(() => {
         resolve({ message: 'Document updated successfully' })
       })
-      .catch((error: any) => {
+      .catch((error) => {
         reject({
-          message: new Error('Error updating document'),
-          error
+          message: 'Error updating document',
+          error: new Error(error)
         })
       })
   })
@@ -139,35 +139,30 @@ export const deleteDocument = (
           message: 'Document deleted successfully'
         })
       })
-      .catch((error: any) => {
+      .catch((error) => {
         reject({
-          message: new Error('Error deleting document'),
-          error
+          message: 'Error deleting document',
+          error: new Error(error)
         })
       })
   })
 }
 
 // Upload an image to Firebase Storage and store the path in Firestore
-export const uploadImage = (
-  imageData: string,
-  collectionName: string,
-  documentId: string
-): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const storageRef = ref(storage, `images/${documentId}.jpg`)
-    uploadString(storageRef, imageData, 'data_url')
-      .then(async () => {
-        const imagePath = `images/${documentId}.jpg`
-        const documentRef = doc(db, collectionName, documentId)
-        await setDoc(documentRef, { imagePath })
-        resolve(imagePath)
-      })
-      .catch((error) => {
-        reject({
-          message: new Error('Error uploading image'),
-          error
-        })
-      })
+export const uploadFilesToStorage = async (
+  fileList: FileList,
+  document: string,
+  collectionName = 'spa'
+): Promise<string[]> => {
+  const uploadPromises = Object.values(fileList).map(async (file) => {
+    const storageRef = ref(
+      storage,
+      `${collectionName}/${document}/${file.name}`
+    )
+    await uploadBytes(storageRef, file)
+    const downloadURL = await getDownloadURL(storageRef)
+    return downloadURL
   })
+
+  return Promise.all(uploadPromises)
 }
