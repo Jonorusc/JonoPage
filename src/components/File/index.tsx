@@ -2,7 +2,7 @@ import * as S from './styles'
 import { FileProps, EventType, ImageObject } from '@/types/file'
 import { useState } from 'react'
 
-const File = <T extends (event?: EventType, images?: File[] | File) => void>({
+const File = <T extends (event?: EventType, images?: ImageObject[]) => void>({
   name,
   types,
   label,
@@ -31,10 +31,7 @@ const File = <T extends (event?: EventType, images?: File[] | File) => void>({
     !!onInputChange &&
       typeof onInputChange === 'function' &&
       images.length > 0 &&
-      onInputChange(
-        e,
-        images.map((image) => image.file)
-      )
+      onInputChange(e, images)
   }
 
   return (
