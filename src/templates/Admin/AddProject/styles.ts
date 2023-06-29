@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { Container } from '@/components/Container'
 import { Input } from '@/components/Input/styles'
 import { Form } from '@/components/Form/styles'
+import { Flex } from '@/components/Flex'
 import { Wrapper as Button } from '@/components/Button/styles'
 
 export const Wrapper = styled.div`
@@ -27,31 +28,6 @@ export const Wrapper = styled.div`
       padding: 0.4rem 1rem;
     }
   }
-`
-
-export const FlexColumn = styled.div<{ gap?: string }>`
-  ${({ gap }) => css`
-    display: flex;
-    flex-direction: column;
-    ${!!gap &&
-    css`
-      gap: ${gap};
-    `}
-  `};
-`
-export const Flex = styled.div<{ gap?: string }>`
-  ${({ gap }) => css`
-    display: flex;
-    ${!!gap &&
-    css`
-      gap: ${gap};
-    `}
-  `};
-`
-
-export const GridCenter = styled.div`
-  display: grid;
-  place-items: center;
 `
 
 export const Section = styled.section`

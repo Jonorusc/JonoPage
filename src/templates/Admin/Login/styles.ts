@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { FlexColumn as FlexColumnBase } from '../AddProject/styles'
+import { FlexColumn as FlexColumnBase } from '@/components/Flex'
 import { Wrapper as Button } from '@/components/Button/styles'
 export const Wrapper = styled.div`
   ${({ theme }) => css`
