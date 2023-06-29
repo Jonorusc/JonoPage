@@ -1,7 +1,7 @@
 export type EventType = React.ChangeEvent<HTMLInputElement>
 
 export type FileProps<
-  T extends (event?: EventType, images?: File[] | File) => void
+  T extends (event?: EventType, images?: ImageObject[]) => void
 > = {
   name: string
   types: string[]
