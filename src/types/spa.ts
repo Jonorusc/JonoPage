@@ -1,9 +1,10 @@
-type Project = {
+export type Project = {
   title: string
   description: string
   source: string
   img: string[]
   readme: string
+  slogan: string
 }
 
 export type SpaProps = {
