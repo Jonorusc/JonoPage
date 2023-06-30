@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import AdminTemplate from '@/templates/Admin'
 import NewProject from '@/templates/Admin/AddProject'
 import WithAuth from '@/utils/withAuth'
@@ -7,9 +6,11 @@ import Notify from '@/components/Notify'
 
 import { InputValue, FormEvent } from '@/types/form'
 
-import { useState } from 'react'
+import { uploadProject } from '@/firebase/helpers'
+import eventEmitter from '@/components/Events'
+import { useRouter } from 'next/router'
 
-import * as firebase from '@/firebase/crud'
+import { useState } from 'react'
 
 const AddProject = () => {
   const [loading, setLoading] = useState({ message: '', visible: false })
@@ -18,59 +19,32 @@ const AddProject = () => {
     visible: false,
     error: false
   })
-
-  const uploadProject = async (page: any, project: any) => {
-    await firebase
-      .createOrUpdateDocument({
-        ...page,
-        projects: [...page.projects, project]
-      })
-      .then(() => {
-        setNotify({
-          message: 'Project uploaded successfully',
-          visible: true,
-          error: false
-        })
-        setLoading({ message: '', visible: false })
-      })
-      .catch((error) => {
-        setNotify({ message: error.message, visible: true, error: true })
-        setLoading({ message: '', visible: false })
-      })
-  }
+  const router = useRouter()
 
   const onSubmit = async (e: FormEvent, formValues: InputValue) => {
-    // get all the projects from the database
-    const page = await firebase.getDocumentById('spa', 'page')
+    uploadProject(formValues)
 
-    // taking image from the form
-    setLoading({ message: 'Uploading images...', visible: true })
-    const imagesFileList = formValues.img as FileList
+    const handleEvents = (type: string, message: string, error: boolean) => {
+      if (type === 'up-uploading') {
+        setLoading({ message, visible: true })
+      } else {
+        setLoading({ message, visible: false })
+        setNotify({ message, visible: true, error })
+      }
+    }
 
-    // upload the images to firebase storage
-    await firebase
-      .uploadFilesToStorage(imagesFileList, 'projects')
-      .then((uploadedImagePaths) => {
-        setLoading({ message: 'Images uploaded', visible: true })
+    // listen to the event
+    eventEmitter.on('up-uploading', (message) =>
+      handleEvents('up-uploading', message as string, false)
+    )
+    eventEmitter.on('up-uploaderror', (message) =>
+      handleEvents('up-uploaderror', message as string, true)
+    )
 
-        // create the project object
-        const project = {
-          ...formValues,
-          img: uploadedImagePaths
-        }
-
-        // create the project in the database
-        setLoading({ message: 'Uploading Project', visible: true })
-        uploadProject(page, project)
-      })
-      .catch(() => {
-        setNotify({
-          message: 'An error occurred while uploading the images',
-          visible: true,
-          error: true
-        })
-        setLoading({ message: '', visible: false })
-      })
+    eventEmitter.on('up-uploadsuccess', (message) => {
+      handleEvents('up-uploadsuccess', message as string, false)
+      router.push('/admin')
+    })
   }
 
   return (
