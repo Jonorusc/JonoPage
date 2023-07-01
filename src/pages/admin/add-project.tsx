@@ -7,7 +7,6 @@ import Notify from '@/components/Notify'
 import { InputValue, FormEvent } from '@/types/form'
 
 import { uploadProject } from '@/firebase/helpers'
-import eventEmitter from '@/components/Events'
 import { useRouter } from 'next/router'
 
 import { useState } from 'react'
@@ -22,7 +21,22 @@ const AddProject = () => {
   const router = useRouter()
 
   const onSubmit = async (e: FormEvent, formValues: InputValue) => {
-    uploadProject(formValues)
+    const upload = uploadProject(formValues)
+
+    // listen to the event
+    upload.on('uploading', (message: string) =>
+      handleEvents('up-uploading', message, false)
+    )
+    upload.on('uploaderror', (message: string) =>
+      handleEvents('uploaderror', message, true)
+    )
+
+    upload.on('uploadsuccess', (message: string) => {
+      handleEvents('uploadsuccess', message, false)
+      setTimeout(() => {
+        router.push('/admin')
+      }, 3000)
+    })
 
     const handleEvents = (type: string, message: string, error: boolean) => {
       if (type === 'up-uploading') {
@@ -32,19 +46,6 @@ const AddProject = () => {
         setNotify({ message, visible: true, error })
       }
     }
-
-    // listen to the event
-    eventEmitter.on('up-uploading', (message) =>
-      handleEvents('up-uploading', message as string, false)
-    )
-    eventEmitter.on('up-uploaderror', (message) =>
-      handleEvents('up-uploaderror', message as string, true)
-    )
-
-    eventEmitter.on('up-uploadsuccess', (message) => {
-      handleEvents('up-uploadsuccess', message as string, false)
-      router.push('/admin')
-    })
   }
 
   return (
