@@ -26,10 +26,11 @@ export const Label = styled.label.attrs({
     border-radius: ${theme.border.radius};
   `};
 `
-export const Input = styled.input.attrs({
+export const Input = styled.input.attrs((props) => ({
   type: 'file',
-  tabIndex: 0
-})`
+  tabIndex: 0,
+  name: props.name
+}))`
   border: none;
   outline: none;
   min-width: 30rem;
