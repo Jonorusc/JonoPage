@@ -1,9 +1,9 @@
 export type Project = {
   title: string
   description: string
-  source: string
+  source?: string
   img: string[]
-  readme: string
+  readme?: string
   slogan: string
 }
 
@@ -19,7 +19,7 @@ export type SpaProps = {
   }
   about: {
     title: string
-    paragraph: string
+    paragraph: string[]
   }
   projects: Project[]
   footer: {
