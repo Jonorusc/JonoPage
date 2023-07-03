@@ -8,14 +8,19 @@ const Login = () => {
   const [message, setMessage] = useState('')
   const router = useRouter()
 
-  const onSubmit = () =>
-    signInWithGoogle()
-      .then(() => {
-        router.push('/admin/')
-      })
-      .catch((error) => {
-        setMessage(error.message)
-      })
+  const onSubmit = () => {
+    try {
+      signInWithGoogle()
+        .then(() => {
+          router.push('/admin/')
+        })
+        .catch((error) => {
+          setMessage(error.message)
+        })
+    } catch (error) {
+      setMessage('Something went wrong, try again later')
+    }
+  }
 
   return (
     <main>
