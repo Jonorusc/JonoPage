@@ -1,12 +1,14 @@
 import * as S from './styles'
 
+import ReactDom from 'react-dom'
+
 type Props = {
   visible: boolean
   message: string
 }
 
 const Loader = ({ visible, message }: Props) => {
-  return (
+  return ReactDom.createPortal(
     <S.Animate>
       {visible && (
         <S.Wrapper>
@@ -14,7 +16,8 @@ const Loader = ({ visible, message }: Props) => {
           <S.Message>{message}</S.Message>
         </S.Wrapper>
       )}
-    </S.Animate>
+    </S.Animate>,
+    document.body
   )
 }
 
