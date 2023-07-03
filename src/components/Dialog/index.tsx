@@ -4,8 +4,10 @@ import Button from '@/components/Button'
 import Text from '@/components/Text'
 import { Flex } from '@/components/Flex'
 
+import ReactDOM from 'react-dom'
+
 const Dialog = ({ open, title, onYes, onNo }: DialogProps) => {
-  return (
+  return ReactDOM.createPortal(
     <S.Animate>
       {open ? (
         <S.Wrapper>
@@ -20,7 +22,8 @@ const Dialog = ({ open, title, onYes, onNo }: DialogProps) => {
           </S.Dialog>
         </S.Wrapper>
       ) : null}
-    </S.Animate>
+    </S.Animate>,
+    document.body
   )
 }
 
