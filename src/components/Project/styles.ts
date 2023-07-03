@@ -77,7 +77,9 @@ export const Wrapper = styled(ImageBox)`
     }
   `};
 `
-export const Close = styled.button`
+export const Close = styled.button.attrs({
+  type: 'button'
+})`
   ${({ theme }) => css`
     position: absolute;
     top: 1.5rem;

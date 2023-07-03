@@ -32,10 +32,9 @@ const NewProject = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
             <Input
               name="title"
               placeholder={
-                checkError('title')
-                  ? (formError.description as string)
-                  : 'Title'
+                checkError('title') ? (formError.title as string) : ''
               }
+              label="Title"
               haserror={checkError('title')}
               type="text"
               required
@@ -45,8 +44,9 @@ const NewProject = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
               placeholder={
                 checkError('description')
                   ? (formError.description as string)
-                  : 'Description'
+                  : ''
               }
+              label="Description"
               haserror={checkError('description')}
               type="text"
               required
@@ -57,10 +57,9 @@ const NewProject = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
             <Input
               name="source"
               placeholder={
-                checkError('source')
-                  ? (formError.description as string)
-                  : 'Project Source Code'
+                checkError('source') ? (formError.source as string) : ''
               }
+              label="Source Code"
               haserror={checkError('source')}
               type="text"
               required
@@ -70,9 +69,7 @@ const NewProject = ({ onSubmit, onReset }: AddProjectTemplateProps) => {
                 name="img"
                 types={['image/png', 'image/jpeg']}
                 label={
-                  checkError('img')
-                    ? (formError.description as string)
-                    : 'Add images'
+                  checkError('img') ? (formError.img as string) : 'Add images'
                 }
                 haserror={checkError('img')}
                 multiple={true}

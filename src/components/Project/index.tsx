@@ -44,7 +44,8 @@ const Project = ({
       <S.Motion>
         <S.Wrapper>
           <S.Close
-            onClick={(e: React.MouseEvent) => {
+            key={slogan}
+            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
               e.stopPropagation()
               setExclude(true)
             }}

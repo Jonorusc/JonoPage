@@ -9,9 +9,10 @@ const File = <T extends (event?: EventType, images?: ImageObject[]) => void>({
   multiple = false,
   required = false,
   haserror = false,
-  onInputChange
+  onInputChange,
+  img = []
 }: FileProps<T>) => {
-  const [images, setImages] = useState<ImageObject[]>([])
+  const [images, setImages] = useState<ImageObject[]>(img)
 
   const onInputChangeHandler = (e: EventType) => {
     const { files } = e.target as HTMLInputElement
@@ -63,7 +64,7 @@ const File = <T extends (event?: EventType, images?: ImageObject[]) => void>({
         id={name}
         name={name}
         onChange={onInputChangeHandler}
-        {...(required && { required })}
+        {...(required && img.length === 0 && { required })}
       />
       <S.Span>{images.length > 0 ? `${images.length} loaded` : null}</S.Span>
     </S.Label>

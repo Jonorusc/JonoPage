@@ -5,6 +5,7 @@ export type FileProps<
 > = {
   name: string
   types: string[]
+  img?: ImageObject[]
   label: string
   multiple?: boolean
   onInputChange?: T
@@ -14,5 +15,5 @@ export type FileProps<
 
 export type ImageObject = {
   url: string
-  file: File
+  file?: File
 }

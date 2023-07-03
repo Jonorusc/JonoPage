@@ -19,7 +19,9 @@ const TagsInput = <T extends (tags: string[]) => void>({
   initialTags,
   onChange,
   placeholder,
-  disabled = false
+  disabled = false,
+  name,
+  required = false
 }: TagsInputProps<T>) => {
   const [inputValue, setInputValue] = useState('')
   const [tags, setTags] = useState<string[]>(initialTags)
@@ -48,7 +50,7 @@ const TagsInput = <T extends (tags: string[]) => void>({
       }
       setTags(newTags)
       // callback - onChange function
-      onChange(newTags)
+      onChange && onChange(newTags)
       setInputValue('')
     }
   }
@@ -60,7 +62,7 @@ const TagsInput = <T extends (tags: string[]) => void>({
     e.stopPropagation()
     const newTags = tags.filter((t) => t !== tag)
     setTags(newTags)
-    onChange(newTags)
+    onChange && onChange(newTags)
   }
 
   const icons = {
@@ -99,9 +101,12 @@ const TagsInput = <T extends (tags: string[]) => void>({
         <S.Input
           type="text"
           value={inputValue}
+          id={name}
+          name={name}
           onChange={handleInputChange}
-          onKeyPress={handleInputKeyPress}
+          onKeyDown={handleInputKeyPress}
           placeholder={placeholder}
+          required={required}
         />
       ) : null}
     </S.Wrapper>

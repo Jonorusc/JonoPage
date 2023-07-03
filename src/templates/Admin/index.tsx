@@ -24,7 +24,7 @@ const AdminTemplate = ({
 }: AdminTemplateProps) => {
   return (
     <S.Wrapper>
-      <Container padding="4.6rem">
+      <Container padding="4rem">
         <FlexColumn>
           <Link href={`${link}`}>
             <Text
@@ -36,7 +36,7 @@ const AdminTemplate = ({
               {linkLabel}
             </Text>
           </Link>
-          <Text color="dark" size="medium" mt="2rem">
+          <Text color="dark" size="medium" mt="2rem" istitle>
             {title}
           </Text>
         </FlexColumn>

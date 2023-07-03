@@ -25,7 +25,7 @@ const AddProject = () => {
 
     // listen to the event
     upload.on('uploading', (message: string) =>
-      handleEvents('up-uploading', message, false)
+      handleEvents('uploading', message, false)
     )
     upload.on('uploaderror', (message: string) =>
       handleEvents('uploaderror', message, true)
@@ -35,11 +35,11 @@ const AddProject = () => {
       handleEvents('uploadsuccess', message, false)
       setTimeout(() => {
         router.push('/admin')
-      }, 3000)
+      }, 2000)
     })
 
     const handleEvents = (type: string, message: string, error: boolean) => {
-      if (type === 'up-uploading') {
+      if (type === 'uploading') {
         setLoading({ message, visible: true })
       } else {
         setLoading({ message, visible: false })

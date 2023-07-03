@@ -11,7 +11,13 @@ import {
   deleteDoc,
   getFirestore
 } from 'firebase/firestore'
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject
+} from 'firebase/storage'
 import { firebaseAppConfig } from '@/utils/firebaseAppConfig'
 const app = initializeApp(firebaseAppConfig)
 
@@ -165,4 +171,27 @@ export const uploadFilesToStorage = async (
   })
 
   return Promise.all(uploadPromises)
+}
+
+// delete an image from Firebase Storage
+export const deleteImagesFromStorage = async (
+  imageUrls: string[]
+): Promise<void[]> => {
+  const deletePromises = imageUrls.map(async (imageUrl) => {
+    const path = extractStoragePathFromUrl(imageUrl)
+    if (path) {
+      const storageRef = ref(storage, path)
+      await deleteObject(storageRef)
+    }
+  })
+
+  return Promise.all(deletePromises)
+}
+
+const extractStoragePathFromUrl = (imageUrl: string): string | null => {
+  const match = imageUrl.match(/\/o\/(.+)\?/)
+  if (match && match[1]) {
+    return decodeURIComponent(match[1])
+  }
+  return null
 }

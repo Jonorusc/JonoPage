@@ -12,7 +12,9 @@ const meta: Meta<typeof Input> = {
     type: 'text',
     name: 'name',
     onInputChange: () => console.log('test'),
-    fontSize: 'medium'
+    fontSize: 'medium',
+    label: 'label',
+    required: false
   },
   argTypes: {
     onInputChange: { action: 'changed' },

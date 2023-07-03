@@ -15,6 +15,10 @@ export const Wrapper = styled.div<{ disabled: boolean }>`
     min-height: 5rem;
     width: ${disabled ? 'fit-content' : '100%'};
     box-sizing: border-box;
+
+    &:focus-within {
+      outline: 0.1rem dashed ${theme.palette.darkenBlue};
+    }
   `};
 `
 
@@ -54,15 +58,17 @@ export const Tag = styled.div<{ link: boolean }>`
 `
 
 export const Input = styled.input`
-  border: none;
-  outline: none;
-  flex-grow: 1;
-  background-color: transparent;
-  color: ${({ theme }) => theme.palette.darkenBlue};
-  font-family: 'K2D', sans-serif;
-  font-size: 1.6rem;
+  ${({ theme }) => css`
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    background-color: transparent;
+    color: ${theme.palette.darkenBlue};
+    font-family: 'K2D', sans-serif;
+    font-size: ${theme.font.size.medium};
 
-  &::placeholder {
-    color: ${({ theme }) => theme.palette.darkenBlue};
-  }
+    &::placeholder {
+      color: ${theme.palette.grey};
+    }
+  `};
 `

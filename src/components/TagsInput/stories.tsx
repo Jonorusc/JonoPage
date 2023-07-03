@@ -12,7 +12,8 @@ const meta: Meta<typeof TagsInput> = {
     initialTags: ['https://www.youtube.com/@DevByLucas'],
     placeholder: 'Add a tag',
     onChange: handleTagsChange,
-    disabled: false
+    disabled: false,
+    name: 'tags'
   }
 }
 

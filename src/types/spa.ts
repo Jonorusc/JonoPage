@@ -7,31 +7,39 @@ export type Project = {
   slogan: string
 }
 
+export type HomeProps = {
+  brand: string
+  btnText: string
+}
+
+export type NavBar = {
+  brand: string
+  img: string
+}
+
+export type AboutProps = {
+  title: string
+  paragraph: string
+}
+
+export type FooterProps = {
+  title: string
+  socialMedia: {
+    youtube: string
+    instagram: string
+    facebook?: string
+    github?: string
+    linkedin?: string
+    twitter?: string
+  }
+  pageSource: string
+}
+
 export type SpaProps = {
-  navBar: {
-    img: string
-    brand: string
-    dark?: boolean
-  }
-  home: {
-    title: string
-    btnText: string
-  }
-  about: {
-    title: string
-    paragraph: string[]
-  }
+  id?: string
+  home: HomeProps
+  navbar: NavBar
+  about: AboutProps
   projects: Project[]
-  footer: {
-    title: string
-    socialMedia: {
-      youtube: string
-      instagram: string
-      github?: string
-      linkedin?: string
-      twitter?: string
-      facebook?: string
-    }
-    pageSource: string
-  }
+  footer: FooterProps
 }
