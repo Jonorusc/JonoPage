@@ -5,7 +5,7 @@ import Notify from '@/components/Notify'
 import { useState } from 'react'
 
 const Login = () => {
-  const [message, setMessage] = useState('' as string)
+  const [message, setMessage] = useState('')
   const router = useRouter()
 
   const onSubmit = () =>

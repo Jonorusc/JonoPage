@@ -32,6 +32,10 @@ const Notify = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible])
 
+  if (typeof window === 'undefined') {
+    return null
+  }
+
   return ReactDom.createPortal(
     <S.Animate>
       {visibleState && (
