@@ -29,11 +29,17 @@ export const updateOrCreatePage = (formValues: InputValue) => {
 
         // upload the images to firebase storage
         try {
-          const uploadedImagePaths = await uploadFilesToStorage(
-            imagesFileList,
-            'page'
-          )
-          eventEmitter.emit('uploading', 'Image uploaded')
+          let uploadedImagePaths: string[] = []
+
+          if (imagesFileList) {
+            uploadedImagePaths = await uploadFilesToStorage(
+              imagesFileList,
+              'page'
+            )
+            eventEmitter.emit('uploading', 'Image uploaded')
+          } else {
+            eventEmitter.emit('uploading', 'No image uploaded')
+          }
 
           // create the page object
           const spa: SpaProps = {
@@ -43,7 +49,7 @@ export const updateOrCreatePage = (formValues: InputValue) => {
             },
             navbar: {
               brand: formValues.navbarbrand as string,
-              img: uploadedImagePaths[0]
+              img: imagesFileList ? uploadedImagePaths[0] : page.navbar.img
             },
             about: {
               title: formValues.abouttitle as string,
