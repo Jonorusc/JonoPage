@@ -54,6 +54,18 @@ export const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::-webkit-scrollbar {
+      width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.palette.grey};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.palette.darkenBlue};
+  }
+
   html {
     font-size: ${({ theme }) => theme.htmlFontSize};
   }

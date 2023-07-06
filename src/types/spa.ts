@@ -4,7 +4,7 @@ export type Project = {
   source?: string
   img: string[]
   readme?: string
-  slogan: string
+  slug: string
 }
 
 export type HomeProps = {

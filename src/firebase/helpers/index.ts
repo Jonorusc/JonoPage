@@ -17,6 +17,21 @@ function on(event: string, callback: (data: any) => void) {
   eventEmitter.on(event, callback)
 }
 
+export const getProject = (slug: string) => {
+  return new Promise((resolve, reject) => {
+    getDocumentById('spa', 'page')
+      .then((page: SpaProps) => {
+        const project: Project | undefined = page.projects.find(
+          (p) => p.slug === slug
+        )
+        resolve(project)
+      })
+      .catch(() => {
+        reject(null)
+      })
+  })
+}
+
 export const updateOrCreatePage = (formValues: InputValue) => {
   return {
     promise: new Promise((resolve, reject) => {
@@ -102,8 +117,8 @@ export const uploadProject = (formValues: InputValue) => {
             )
             eventEmitter.emit('uploading', 'Images uploaded')
 
-            // create the slogan from form values title
-            const slogan = formValues.title as string
+            // create the slug from form values title
+            const slug = formValues.title as string
 
             // create the project object
             const project: Project = {
@@ -112,7 +127,7 @@ export const uploadProject = (formValues: InputValue) => {
               source: formValues.source as string,
               readme: formValues.readme as string,
               img: uploadedImagePaths,
-              slogan: slogan.split(' ').join('-').toLowerCase() // replace spaces with dashes and make it lowercase
+              slug: slug.split(' ').join('-').toLowerCase() // replace spaces with dashes and make it lowercase
             }
 
             // create the project in the database
@@ -143,17 +158,17 @@ export const uploadProject = (formValues: InputValue) => {
   }
 }
 
-export const excludeProject = (slogan: string) => {
+export const excludeProject = (slug: string) => {
   return {
     promise: new Promise((resolve, reject) => {
       // Get all the projects from the database
       getDocumentById('spa', 'page')
         .then((page: SpaProps) => {
           // Exclude the project from the projects array
-          const projects = page.projects.filter((p) => p.slogan !== slogan)
+          const projects = page.projects.filter((p) => p.slug !== slug)
 
           // exclude the images from firebase storage
-          const images = page.projects.find((p) => p.slogan === slogan)?.img
+          const images = page.projects.find((p) => p.slug === slug)?.img
           if (images) {
             eventEmitter.emit('deleting', 'Excluding images...')
             deleteImagesFromStorage(images)

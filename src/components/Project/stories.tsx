@@ -8,7 +8,7 @@ const meta: Meta<typeof Project> = {
     title: 'Project title',
     description: 'Project description',
     img: ['https://random.imagecdn.app/500/150'],
-    slogan: 'project-slogan'
+    slug: 'project-slug'
   }
 }
 

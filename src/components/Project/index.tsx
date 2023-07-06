@@ -17,7 +17,7 @@ const Project = ({
   title,
   description,
   img,
-  slogan,
+  slug,
   onExclude
 }: ProjectProps) => {
   const projectImage: string = img[0] // path to image
@@ -28,7 +28,7 @@ const Project = ({
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     event.stopPropagation()
-    router.push(`/project/${slogan}`)
+    router.push(`/project/${slug}`)
   }
 
   const handleOnYes = (
@@ -36,7 +36,7 @@ const Project = ({
   ) => {
     event.stopPropagation()
     setExclude(false)
-    onExclude && onExclude(slogan)
+    onExclude && onExclude(slug)
   }
 
   return (
@@ -44,7 +44,7 @@ const Project = ({
       <S.Motion>
         <S.Wrapper>
           <S.Close
-            key={slogan}
+            key={slug}
             onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
               e.stopPropagation()
               setExclude(true)

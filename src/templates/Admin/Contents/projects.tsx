@@ -8,6 +8,7 @@ import Loader from '@/components/Loader'
 
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
+import responsive from '@/utils/responsiveCarousel'
 import { useRouter } from 'next/router'
 import { excludeProject } from '@/firebase/helpers'
 import { useState } from 'react'
@@ -28,24 +29,6 @@ const ProjectsContents = ({ projects }: ProjectsContentsProps) => {
   })
   const [loader, setLoader] = useState({ message: '', visible: false })
   const router = useRouter()
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  }
 
   const handleProjectExclude = (projectId: string) => {
     const exclude = excludeProject(projectId)
@@ -58,7 +41,7 @@ const ProjectsContents = ({ projects }: ProjectsContentsProps) => {
       handleEvents('deletesuccess', message, false)
       //remove the project from the list
       setTimeout(() => {
-        const newData = data.filter((project) => project.slogan !== projectId)
+        const newData = data.filter((project) => project.slug !== projectId)
         setData(newData)
       }, 1500)
     })
@@ -79,7 +62,7 @@ const ProjectsContents = ({ projects }: ProjectsContentsProps) => {
 
   const carouselItems = () => {
     return data?.map((project) => (
-      <S.CarouselItem key={project.slogan}>
+      <S.CarouselItem key={project.slug}>
         <Project {...project} onExclude={handleProjectExclude} />
       </S.CarouselItem>
     ))
