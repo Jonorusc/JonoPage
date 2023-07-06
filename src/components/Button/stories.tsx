@@ -15,7 +15,9 @@ const meta: Meta<typeof Button> = {
     fontSize: 'medium',
     fontWeight: 'normal',
     icon: <FaInstagram />,
-    type: 'button'
+    type: 'button',
+    width: 'auto',
+    center: false
   },
   argTypes: {
     fontWeight: {

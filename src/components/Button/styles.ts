@@ -5,7 +5,7 @@ import { FontSizeTypes, FontWeightTypes } from '@/types/font'
 
 type WrapperProps = Pick<
   ButtonProps,
-  'bgcolor' | 'color' | 'fontSize' | 'fontWeight' | 'icon'
+  'bgcolor' | 'color' | 'fontSize' | 'fontWeight' | 'icon' | 'center' | 'width'
 >
 
 const wrapperModifiers = {
@@ -24,7 +24,16 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, bgcolor, color, fontSize, fontWeight, icon }) => css`
+  ${({
+    theme,
+    bgcolor,
+    color,
+    fontSize,
+    fontWeight,
+    icon,
+    center,
+    width
+  }) => css`
     border: none;
     border-radius: ${theme.border.radius};
     padding: ${icon ? theme.spacing.small : theme.spacing.medium}
@@ -41,6 +50,13 @@ export const Wrapper = styled.button<WrapperProps>`
     align-items: center;
     justify-content: space-between;
     column-gap: 5rem;
+    width: ${width || '100%'};
+
+    ${center &&
+    css`
+      justify-content: center;
+      column-gap: 0;
+    `};
 
     &:hover {
       opacity: 0.8;

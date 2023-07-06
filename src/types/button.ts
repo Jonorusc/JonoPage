@@ -13,4 +13,6 @@ export type ButtonProps = {
   fontWeight?: FontWeightTypes
   onClick?: (event: React.MouseEvent<any, MouseEvent>) => void
   type?: 'button' | 'submit' | 'reset'
+  center?: boolean
+  width?: string
 }
