@@ -353,6 +353,7 @@ export const Portal = styled(motion.section).attrs({
   },
   exit: {
     opacity: 0,
+    y: [4, -10],
     transition: {
       duration: 0.4,
       delay: 0.3
@@ -382,12 +383,15 @@ export const Portal = styled(motion.section).attrs({
 
     img {
       width: min(80rem, 100%);
+      max-height: 99vh;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      object-fit: cover;
+      object-fit: contain;
       transition: all 0.3s ease-in-out;
+      user-select: none;
+      user-drag: none;
     }
   `};
 `
