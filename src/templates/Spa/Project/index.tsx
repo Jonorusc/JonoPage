@@ -8,7 +8,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import { CarouselItem } from '@/templates/Admin/Contents/styles'
 import responsive from '@/utils/responsiveCarousel'
-import Link from 'next/link'
+// import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/default.css'
@@ -115,16 +115,14 @@ const ProjectDetails = ({ project }: ProjectProps) => {
   return (
     <S.Wrapper>
       <Container padding="4rem 8rem">
-        <Link href="#">
-          <S.A onClick={handleGoBack}>
-            <Text color="green" icon={<FaArrowLeft />} size="medium" gap="1rem">
-              Back
-            </Text>
-          </S.A>
-        </Link>
+        <S.A onClick={handleGoBack}>
+          <Text color="green" icon={<FaArrowLeft />} size="medium" gap="1rem">
+            Back
+          </Text>
+        </S.A>
         <S.Content>
           <Carousel responsive={responsive}>{items}</Carousel>
-          <S.Readme empty={readme ? false : true}>{readmeContent}</S.Readme>
+          <S.Readme empty={!readme ? true : false}>{readmeContent}</S.Readme>
         </S.Content>
         {/* when clicking on a carousel image */}
         {typeof window !== 'undefined'

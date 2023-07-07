@@ -8,6 +8,10 @@ type Props = {
 }
 
 const Loader = ({ visible, message }: Props) => {
+  if (typeof window === 'undefined') {
+    return null
+  }
+
   return ReactDom.createPortal(
     <S.Animate>
       {visible && (

@@ -4,13 +4,13 @@ import { TextProps } from '@/types/text'
 type WrapperProps = Omit<TextProps, 'children' | 'icon' | 'iconPosition'>
 
 export const Wrapper = styled.span<WrapperProps>`
-  ${({ theme, size, color, istitle, gap, up, m, mt, mb, ml, mr }) => css`
+  ${({ theme, size, color, bold, gap, up, m, mt, mb, ml, mr }) => css`
     display: flex;
     align-items: center;
     column-gap: ${gap};
     font-size: ${theme.font.size.small};
     text-transform: ${up ? 'uppercase' : 'auto'};
-    font-weight: ${istitle ? theme.font.bold : theme.font.normal};
+    font-weight: ${bold ? theme.font.bold : theme.font.normal};
     /* margins */
     ${!!m &&
     css`
@@ -62,5 +62,8 @@ export const Icon = styled.div<IconProps>`
 `
 
 export const Text = styled.span`
-  order: 1;
+  ${({ theme }) => css`
+    order: 1;
+    font-family: ${theme.font.family}!important;
+  `};
 `

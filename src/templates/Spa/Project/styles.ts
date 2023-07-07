@@ -60,6 +60,7 @@ export const Content = styled.section`
 export const A = styled.a`
   text-decoration: none;
   display: inline-block;
+  cursor: pointer;
 `
 
 export const Readme = styled.div.attrs({

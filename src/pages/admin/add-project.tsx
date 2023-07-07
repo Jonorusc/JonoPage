@@ -20,6 +20,15 @@ const AddProject = () => {
   })
   const router = useRouter()
 
+  const handleEvents = (type: string, message: string, error: boolean) => {
+    if (type === 'uploading') {
+      setLoading({ message, visible: true })
+    } else {
+      setLoading({ message, visible: false })
+      setNotify({ message, visible: true, error })
+    }
+  }
+
   const onSubmit = async (e: FormEvent, formValues: InputValue) => {
     const upload = uploadProject(formValues)
 
@@ -37,15 +46,6 @@ const AddProject = () => {
         router.push('/admin')
       }, 2000)
     })
-
-    const handleEvents = (type: string, message: string, error: boolean) => {
-      if (type === 'uploading') {
-        setLoading({ message, visible: true })
-      } else {
-        setLoading({ message, visible: false })
-        setNotify({ message, visible: true, error })
-      }
-    }
   }
 
   return (

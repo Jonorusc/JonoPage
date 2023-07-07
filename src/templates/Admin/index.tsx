@@ -36,7 +36,7 @@ const AdminTemplate = ({
               {linkLabel}
             </Text>
           </Link>
-          <Text color="dark" size="medium" mt="2rem" istitle>
+          <Text color="dark" size="medium" mt="2rem" bold>
             {title}
           </Text>
         </FlexColumn>

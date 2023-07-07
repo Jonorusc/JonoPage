@@ -1,39 +1,45 @@
 import * as S from './styles'
 import { TextProps } from '@/types/text'
-const Text = ({
-  size = 'small',
-  color,
-  istitle = false,
-  icon = null,
-  iconposition = 'left',
-  gap = '0.5rem',
-  up = false,
-  m = '',
-  mt = '',
-  mb = '',
-  mr = '',
-  ml = '',
-  children
-}: TextProps) => {
-  if (!children) return null
+import React from 'react'
 
-  return (
-    <S.Wrapper
-      size={size}
-      color={color}
-      istitle={istitle ? istitle : undefined}
-      gap={gap}
-      m={m}
-      mt={mt}
-      mb={mb}
-      mr={mr}
-      ml={ml}
-      up={up ? up : undefined}
-    >
-      <S.Text dangerouslySetInnerHTML={{ __html: children }} />
-      {icon ? <S.Icon iconposition={iconposition}>{icon}</S.Icon> : null}
-    </S.Wrapper>
-  )
-}
+const Text = React.memo(
+  ({
+    size = 'small',
+    color,
+    bold = false,
+    icon = null,
+    iconposition = 'left',
+    gap = '0.5rem',
+    up = false,
+    m = '',
+    mt = '',
+    mb = '',
+    mr = '',
+    ml = '',
+    children
+  }: TextProps) => {
+    if (!children) return null
+
+    return (
+      <S.Wrapper
+        size={size}
+        color={color}
+        gap={gap}
+        m={m}
+        mt={mt}
+        mb={mb}
+        mr={mr}
+        ml={ml}
+        up={up ? up : undefined}
+        bold={bold ? bold : undefined}
+      >
+        <S.Text dangerouslySetInnerHTML={{ __html: children }} />
+        {icon ? <S.Icon iconposition={iconposition}>{icon}</S.Icon> : null}
+      </S.Wrapper>
+    )
+  }
+)
+
+Text.displayName = 'Text'
 
 export default Text

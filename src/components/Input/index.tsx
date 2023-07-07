@@ -42,7 +42,7 @@ const Input = React.memo(
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
-          {...(haserror && { haserror })}
+          haserror={haserror ? haserror : undefined}
           {...(!!fontSize && { fontSize })}
           {...(required && { required })}
         />
@@ -60,7 +60,6 @@ const Input = React.memo(
           value={inputValue}
           type={type}
           {...(!!fontSize && { fontSize })}
-          {...(haserror && { haserror })}
           {...(required && { required })}
           onChange={handleInputChange}
         />

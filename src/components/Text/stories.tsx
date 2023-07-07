@@ -50,7 +50,7 @@ const meta: Meta<typeof Text> = {
         type: 'string'
       }
     },
-    istitle: {
+    bold: {
       type: 'boolean'
     },
     up: {
@@ -81,7 +81,7 @@ const meta: Meta<typeof Text> = {
     icon: <FaInstagram />,
     iconposition: 'left',
     gap: '0.5rem',
-    istitle: false,
+    bold: false,
     up: false,
     m: '',
     mt: '',

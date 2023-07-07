@@ -7,7 +7,7 @@ export type TextProps = {
   icon?: ReactElement | null
   iconposition?: 'left' | 'right'
   color: Colors
-  istitle?: boolean
+  bold?: boolean
   up?: boolean
   m?: string
   mt?: string
