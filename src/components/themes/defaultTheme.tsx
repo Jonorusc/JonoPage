@@ -5,6 +5,7 @@ export const defaultTheme: DefaultTheme = {
   bodyColor: '#F2F4F9',
   containerMaxWidth: '136.6rem', // laptop pro 15" width
   htmlFontSize: '62.5%', // 1rem = 10px
+  title: 'DevByLucas',
   palette: {
     primary: '#F2F4F9',
     secondary: '#2094FD',

@@ -3,6 +3,7 @@ import { signInWithGoogle } from '@/firebase/auth'
 import { useRouter } from 'next/router'
 import Notify from '@/components/Notify'
 import { useState } from 'react'
+import { NextSeo } from 'next-seo'
 
 const Login = () => {
   const [message, setMessage] = useState('')
@@ -24,6 +25,7 @@ const Login = () => {
 
   return (
     <main>
+      <NextSeo title="Login" />
       <LoginPage title="Prove that you're Lucas (me)" onSubmit={onSubmit} />
       <Notify
         message={message}

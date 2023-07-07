@@ -6,6 +6,7 @@ declare module 'styled-components' {
     bodyColor: string
     containerMaxWidth: string
     htmlFontSize: string
+    title?: string
     palette: {
       primary: string
       secondary: string

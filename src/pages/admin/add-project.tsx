@@ -8,6 +8,7 @@ import { InputValue, FormEvent } from '@/types/form'
 
 import { uploadProject } from '@/firebase/helpers'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 import { useState } from 'react'
 
@@ -55,6 +56,7 @@ const AddProject = () => {
         linkLabel="Back to admin"
         title="Adding a Project"
       >
+        <NextSeo title="Add a new project - DevByLucas" />
         <NewProject onSubmit={onSubmit} />
         <Loader message={loading.message} visible={loading.visible} />
         <Notify

@@ -8,6 +8,7 @@ import { SpaProps } from '@/types/spa'
 import { InputValue, FormEvent } from '@/types/form'
 import type { GetStaticProps } from 'next'
 import { useState } from 'react'
+import { NextSeo } from 'next-seo'
 
 import { getDocumentById } from '@/firebase/crud'
 import { updateOrCreatePage } from '@/firebase/helpers'
@@ -51,6 +52,7 @@ const Admin = (props: SpaProps) => {
         linkLabel="Back to landing page"
         title="Administration"
       >
+        <NextSeo title="Administration - DevByLucas" />
         <Contents
           home={props.home}
           navbar={props.navbar}
