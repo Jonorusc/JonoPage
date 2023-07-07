@@ -1,5 +1,6 @@
 import React from 'react'
 import { NextSeo } from 'next-seo'
+// import { useRouter } from 'next/router'
 
 import type { GetStaticProps } from 'next'
 import type { Project, SpaProps } from '@/types/spa'
@@ -7,8 +8,19 @@ import type { Project, SpaProps } from '@/types/spa'
 import { getDocumentById } from '@/firebase/crud'
 import { getProject } from '@/firebase/helpers'
 import ProjectDetails from '@/templates/Spa/Project'
+import Page404 from '@/pages/404'
 
 const Index = React.memo((props: Project) => {
+  // const router = useRouter()
+
+  // if (router.isFallback) {
+  //   return <div>Loading...</div>
+  // }
+
+  if (!props || !props.img) {
+    return <Page404 />
+  }
+
   const canonical = typeof window !== 'undefined' ? window.location.href : ''
 
   return (
