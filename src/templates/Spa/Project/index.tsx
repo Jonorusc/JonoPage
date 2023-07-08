@@ -1,5 +1,5 @@
 import * as S from './styles'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaGithub } from 'react-icons/fa'
 
 import Text from '@/components/Text'
 import { Container } from '@/components/Container'
@@ -8,7 +8,6 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import { CarouselItem } from '@/templates/Admin/Contents/styles'
 import responsive from '@/utils/responsiveCarousel'
-// import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/default.css'
@@ -18,13 +17,15 @@ import { createPortal } from 'react-dom'
 import { useState, useEffect } from 'react'
 
 import type { Project } from '@/types/spa'
+import Link from 'next/link'
+import { Flex } from '@/components/Flex'
 
 type ProjectProps = {
   project: Project
 }
 
 const ProjectDetails = ({ project }: ProjectProps) => {
-  const { readme, title, img } = project
+  const { readme, title, img, source, slug } = project
   const [modal, setModal] = useState('')
   const router = useRouter()
 
@@ -32,20 +33,17 @@ const ProjectDetails = ({ project }: ProjectProps) => {
     // hide scrollbar when modal is open
     if (modal) {
       document.body.style.overflow = 'hidden'
+      // handle arrow keys
+      document.addEventListener('keydown', handleArrowKeys)
+
+      return () => {
+        document.removeEventListener('keydown', handleArrowKeys)
+      }
     } else {
       document.body.style.overflow = 'unset'
     }
-  }, [modal])
-
-  useEffect(() => {
-    // handle arrow keys
-    document.addEventListener('keydown', handleArrowKeys)
-
-    return () => {
-      document.removeEventListener('keydown', handleArrowKeys)
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [modal])
 
   const handleGoBack = () => {
     if (router?.back) {
@@ -55,41 +53,48 @@ const ProjectDetails = ({ project }: ProjectProps) => {
     }
   }
 
-  const toImg = (rl: string): React.MouseEventHandler<SVGElement> => {
+  const EventLeft = () => {
+    // check if index is not out of bounds
+    const prevImg = img.indexOf(modal) - 1
+    if (prevImg >= 0) setModal(img[prevImg])
+    else setModal(img[img.length - 1])
+  }
+  const EventRight = () => {
+    const nextImg = img.indexOf(modal) + 1
+    if (nextImg < img.length) setModal(img[nextImg])
+    else setModal(img[0])
+  }
+
+  const toImg = (rl: string) => {
     switch (rl) {
       case 'left':
-        return () =>
-          handleArrowKeys(new KeyboardEvent('keydown', { key: 'ArrowLeft' }))
+        EventLeft()
+        break
       case 'right':
-        return () =>
-          handleArrowKeys(new KeyboardEvent('keydown', { key: 'ArrowRight' }))
+        EventRight()
+        break
       default:
-        return (event) => event
+        break
     }
   }
 
-  const handleArrowKeys = (e?: KeyboardEvent) => {
-    if (e) {
-      switch (e.key) {
-        case 'ArrowLeft': {
-          // check if index is not out of bounds
-          const prevImg = img.indexOf(modal) - 1
-          if (prevImg >= 0) setModal(img[prevImg])
-          break
-        }
-        case 'ArrowRight': {
-          const nextImg = img.indexOf(modal) + 1
-          if (nextImg < img.length) setModal(img[nextImg])
-          break
-        }
-        case 'Escape':
-          setModal('')
-          break
-        default:
-          break
-      }
+  const handleArrowKeys = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        EventLeft()
+        break
+      case 'ArrowRight':
+        EventRight()
+        break
+      case 'Escape':
+        setModal('')
+        break
+      default:
+        break
     }
   }
+
+  const handleCloseModal = () => setModal('')
 
   const items = img.map((item, index) => {
     return (
@@ -115,11 +120,24 @@ const ProjectDetails = ({ project }: ProjectProps) => {
   return (
     <S.Wrapper>
       <Container padding="4rem 8rem">
-        <S.A onClick={handleGoBack}>
-          <Text color="green" icon={<FaArrowLeft />} size="medium" gap="1rem">
-            Back
-          </Text>
-        </S.A>
+        <Flex justify="space-between" align="center">
+          <S.A onClick={handleGoBack}>
+            <Text color="green" icon={<FaArrowLeft />} size="medium" gap="1rem">
+              Back
+            </Text>
+          </S.A>
+          <Link href={source ? source : `/project/${slug}`} target="_blank">
+            <Text
+              color="grey"
+              size="medium"
+              icon={<FaGithub />}
+              iconposition="right"
+              gap="1rem"
+            >
+              Source code
+            </Text>
+          </Link>
+        </Flex>
         <S.Content>
           <Carousel responsive={responsive}>{items}</Carousel>
           <S.Readme empty={!readme ? true : false}>{readmeContent}</S.Readme>
@@ -129,12 +147,22 @@ const ProjectDetails = ({ project }: ProjectProps) => {
           ? createPortal(
               <S.AnimatedContainer>
                 {modal ? (
-                  <S.Portal>
-                    <i onClick={() => setModal('')}>X</i>
+                  <S.Portal onClick={handleCloseModal}>
+                    <i>X</i>
                     <img src={modal} alt="Image chosen from the carousel" />
                     <S.Buttons visible={img.length > 1 ? true : false}>
-                      <FaArrowLeft onClick={toImg('left')} />
-                      <FaArrowRight onClick={toImg('right')} />
+                      <FaArrowLeft
+                        onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+                          e.stopPropagation()
+                          toImg('left')
+                        }}
+                      />
+                      <FaArrowRight
+                        onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+                          e.stopPropagation()
+                          toImg('right')
+                        }}
+                      />
                     </S.Buttons>
                   </S.Portal>
                 ) : null}
