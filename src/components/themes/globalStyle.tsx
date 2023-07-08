@@ -29,6 +29,9 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.bodyColor};
     color: ${({ theme }) => theme.palette.darker};
     font-family: ${({ theme }) => theme.font.family};
+    &::-webkit-scrollbar {
+      height: 0;
+    }
   }
   
 `
