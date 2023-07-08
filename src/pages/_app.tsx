@@ -7,11 +7,14 @@ import { GlobalStyle } from '../components/themes/globalStyle'
 import NextProgress from 'next-progress'
 import { DefaultSeo } from 'next-seo'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { AnimatePresence } from 'framer-motion'
 
 import SEO from '../../next-seo.config'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme] = useLocalStorage('theme', defaultTheme)
+  const router = useRouter()
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,7 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         height={3}
         options={{ showSpinner: false }}
       />
-      <Component {...pageProps} />
+      <AnimatePresence mode="wait" initial={false}>
+        <Component {...pageProps} key={router.asPath} />
+      </AnimatePresence>
     </ThemeProvider>
   )
 }
