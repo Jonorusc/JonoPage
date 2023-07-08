@@ -127,7 +127,7 @@ export const uploadProject = (formValues: InputValue) => {
               source: formValues.source as string,
               readme: formValues.readme as string,
               img: uploadedImagePaths,
-              slug: slug.split(' ').join('-').toLowerCase() // replace spaces with dashes and make it lowercase
+              slug: slug.toLowerCase().replace(/\s+/g, '-').replace(/-$/, '') // replace spaces with dashes and make it lowercase
             }
 
             // create the project in the database
