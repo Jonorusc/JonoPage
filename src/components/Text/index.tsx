@@ -18,8 +18,6 @@ const Text = React.memo(
     ml = '',
     children
   }: TextProps) => {
-    if (!children) return null
-
     return (
       <S.Wrapper
         size={size}
@@ -33,7 +31,9 @@ const Text = React.memo(
         up={up ? up : undefined}
         bold={bold ? bold : undefined}
       >
-        <S.Text dangerouslySetInnerHTML={{ __html: children }} />
+        {children ? (
+          <S.Text dangerouslySetInnerHTML={{ __html: children }} />
+        ) : null}
         {icon ? <S.Icon iconposition={iconposition}>{icon}</S.Icon> : null}
       </S.Wrapper>
     )
