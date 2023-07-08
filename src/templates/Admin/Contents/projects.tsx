@@ -11,7 +11,7 @@ import 'react-multi-carousel/lib/styles.css'
 import responsive from '@/utils/responsiveCarousel'
 import { useRouter } from 'next/router'
 import { excludeProject } from '@/firebase/helpers'
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 
 import { Project as ProjectProps } from '@/types/spa'
 import { FaFile } from 'react-icons/fa'
@@ -60,14 +60,6 @@ const ProjectsContents = ({ projects }: ProjectsContentsProps) => {
     }
   }
 
-  const carouselItems = () => {
-    return data?.map((project) => (
-      <S.CarouselItem key={project.slug}>
-        <Project {...project} onExclude={handleProjectExclude} />
-      </S.CarouselItem>
-    ))
-  }
-
   return (
     <S.Section>
       <Text color="dark" size="medium" mb="2rem">
@@ -80,11 +72,19 @@ const ProjectsContents = ({ projects }: ProjectsContentsProps) => {
         text="Add a project"
         onClick={() => router.push('/admin/add-project')}
       />
+
       <S.CarouselWrapper>
         <Carousel responsive={responsive} rtl>
-          {carouselItems()}
+          {data?.map((project) => (
+            <Fragment key={project.slug}>
+              <S.CarouselItem>
+                <Project {...project} onExclude={handleProjectExclude} />
+              </S.CarouselItem>
+            </Fragment>
+          ))}
         </Carousel>
       </S.CarouselWrapper>
+
       <Loader message={loader.message} visible={loader.visible} />
       <Notify
         type={notify.error ? 'error' : 'success'}
