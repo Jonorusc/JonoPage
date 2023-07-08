@@ -4,7 +4,7 @@ import { Project as Props } from '@/types/spa'
 import { FaRegWindowClose, FaLink } from 'react-icons/fa'
 
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import Dialog from '@/components/Dialog'
 import { Animate } from '@/components/Dialog/styles'
@@ -22,14 +22,6 @@ const Project = ({
 }: ProjectProps) => {
   const projectImage: string = img[0] // path to image
   const [exclude, setExclude] = useState(false)
-  const router = useRouter()
-
-  const handleOnClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    event.stopPropagation()
-    router.push(`/project/${slug}`)
-  }
 
   const handleOnYes = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -56,9 +48,9 @@ const Project = ({
           <S.Title>
             {title.length > 25 ? title.substring(0, 29) + '...' : title}
           </S.Title>
-          <S.Link onClick={handleOnClick}>
+          <Link href={`/project/${slug}`} passHref>
             <FaLink />
-          </S.Link>
+          </Link>
           <Dialog
             open={exclude}
             title="Are you sure?"

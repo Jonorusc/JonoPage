@@ -26,8 +26,29 @@ export const Wrapper = styled(ImageBox)`
     border: none;
     border-radius: ${theme.border.radius};
 
+    a {
+      width: 3rem;
+      height: 3rem;
+      z-index: ${theme.layers.overlay};
+      position: absolute;
+      text-decoration: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      visibility: hidden;
+      transition: all 0.2s ease-in;
+      transition-delay: 0.2s;
+
+      svg {
+        width: inherit;
+        height: inherit;
+        color: ${theme.palette.whiteSmoke};
+        opacity: 0.8;
+      }
+    }
+
     &:hover {
-      ${Link} {
+      a {
         visibility: visible;
         pointer-events: auto;
         transform: translate(-50%, -50%) scale(1);
@@ -124,26 +145,5 @@ export const Title = styled.h2`
     margin-top: ${theme.spacing.small};
     margin-bottom: ${theme.spacing.small};
     background-color: rgba(0, 0, 0, 0.5);
-  `};
-`
-export const Link = styled.div`
-  ${({ theme }) => css`
-    width: 3rem;
-    height: 3rem;
-    z-index: ${theme.layers.overlay};
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    visibility: hidden;
-    transition: all 0.2s ease-in;
-    transition-delay: 0.2s;
-
-    svg {
-      width: inherit;
-      height: inherit;
-      color: ${theme.palette.whiteSmoke};
-      opacity: 0.8;
-    }
   `};
 `
