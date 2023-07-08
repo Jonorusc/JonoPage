@@ -9,8 +9,9 @@ import { getDocumentById } from '@/firebase/crud'
 import { getProject } from '@/firebase/helpers'
 import ProjectDetails from '@/templates/Spa/Project'
 import Page404 from '@/pages/404'
+import PageTransition from '@/components/PageTransition'
 
-const Index = React.memo((props: Project) => {
+const Index = (props: Project) => {
   // const router = useRouter()
 
   // if (router.isFallback) {
@@ -24,7 +25,7 @@ const Index = React.memo((props: Project) => {
   const canonical = typeof window !== 'undefined' ? window.location.href : ''
 
   return (
-    <>
+    <PageTransition>
       <NextSeo
         title={`${props.title} - DevByLucas`}
         description={props.description}
@@ -42,11 +43,9 @@ const Index = React.memo((props: Project) => {
         }}
       />
       <ProjectDetails project={props} />
-    </>
+    </PageTransition>
   )
-})
-
-Index.displayName = 'Project'
+}
 
 export async function getStaticPaths() {
   const data: SpaProps = await getDocumentById('spa', 'page')
