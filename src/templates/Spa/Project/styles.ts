@@ -8,6 +8,10 @@ export const Wrapper = styled.main`
     height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;
+
+    a {
+      text-decoration: none;
+    }
   `};
 `
 
@@ -336,7 +340,7 @@ export const Readme = styled.div.attrs({
 
 export const AnimatedContainer = styled(AnimatePresence)``
 
-export const Portal = styled(motion.section).attrs({
+export const Portal = styled(motion.button).attrs({
   initial: {
     opacity: 0,
     scale: 0
@@ -370,16 +374,18 @@ export const Portal = styled(motion.section).attrs({
     height: 100%;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.5);
+    outline: none;
+    border: none;
 
     i {
       position: absolute;
       top: 2rem;
-      right: 3rem;
+      left: 3rem;
       cursor: pointer;
       color: ${theme.palette.whiteSmoke};
       text-transform: uppercases;
       font-style: normal;
-      font-size: ${theme.font.size.large};
+      font-size: ${theme.font.size.medium};
     }
 
     img {
