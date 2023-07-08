@@ -7,7 +7,7 @@ import PageTransition from '@/components/PageTransition'
 
 import { SpaProps } from '@/types/spa'
 import { InputValue, FormEvent } from '@/types/form'
-import type { GetServerSideProps } from 'next'
+import type { GetStaticProps } from 'next'
 import { useState } from 'react'
 import { NextSeo } from 'next-seo'
 
@@ -84,7 +84,7 @@ const Admin = (props: SpaProps) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   let projects = {}
 
   await getDocumentById('spa', 'page')
@@ -96,6 +96,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     })
 
   return {
+    revalidate: 5,
     props: {
       ...projects
     }
