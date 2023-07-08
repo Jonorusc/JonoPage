@@ -149,7 +149,13 @@ const ProjectDetails = ({ project }: ProjectProps) => {
                 {modal ? (
                   <S.Portal onClick={handleCloseModal}>
                     <i>X</i>
-                    <img src={modal} alt="Image chosen from the carousel" />
+                    <img
+                      src={modal}
+                      alt="Image chosen from the carousel"
+                      onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+                        e.stopPropagation()
+                      }
+                    />
                     <S.Buttons visible={img.length > 1 ? true : false}>
                       <FaArrowLeft
                         onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
