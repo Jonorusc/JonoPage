@@ -3,10 +3,11 @@ import Contents from '@/templates/Admin/Contents'
 import WithAuth from '@/utils/withAuth'
 import Loader from '@/components/Loader'
 import Notify from '@/components/Notify'
+import PageTransition from '@/components/PageTransition'
 
 import { SpaProps } from '@/types/spa'
 import { InputValue, FormEvent } from '@/types/form'
-import type { GetStaticProps } from 'next'
+import type { GetServerSideProps } from 'next'
 import { useState } from 'react'
 import { NextSeo } from 'next-seo'
 
@@ -47,35 +48,43 @@ const Admin = (props: SpaProps) => {
 
   return (
     <WithAuth>
-      <AdminTemplate
-        link="/"
-        linkLabel="Back to landing page"
-        title="Administration"
+      <PageTransition
+        variants={{
+          initial: { x: '-100%' },
+          animate: { x: 0 },
+          exit: { x: '-100%' }
+        }}
       >
-        <NextSeo title="Administration - DevByLucas" />
-        <Contents
-          home={props.home}
-          navbar={props.navbar}
-          about={props.about}
-          projects={props.projects}
-          footer={props.footer}
-          onSubmit={onSubmit}
-        />
-        <Loader message={loading.message} visible={loading.visible} />
-        <Notify
-          type={notify.error ? 'error' : 'success'}
-          message={notify.message}
-          visible={notify.visible}
-          onClose={() =>
-            setNotify({ message: '', visible: false, error: false })
-          }
-        />
-      </AdminTemplate>
+        <AdminTemplate
+          link="/"
+          linkLabel="Back to landing page"
+          title="Administration"
+        >
+          <NextSeo title="Administration - DevByLucas" />
+          <Contents
+            home={props.home}
+            navbar={props.navbar}
+            about={props.about}
+            projects={props.projects}
+            footer={props.footer}
+            onSubmit={onSubmit}
+          />
+          <Loader message={loading.message} visible={loading.visible} />
+          <Notify
+            type={notify.error ? 'error' : 'success'}
+            message={notify.message}
+            visible={notify.visible}
+            onClose={() =>
+              setNotify({ message: '', visible: false, error: false })
+            }
+          />
+        </AdminTemplate>
+      </PageTransition>
     </WithAuth>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let projects = {}
 
   await getDocumentById('spa', 'page')
