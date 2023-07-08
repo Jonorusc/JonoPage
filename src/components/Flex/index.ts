@@ -17,9 +17,24 @@ export const FlexColumn = styled.div<{ gap?: string; m?: string }>`
   `};
 `
 
-export const Flex = styled.div<{ gap?: string; m?: string }>`
-  ${({ gap, m }) => css`
+export const Flex = styled.div<{
+  gap?: string
+  m?: string
+  justify?: string
+  align?: string
+}>`
+  ${({ gap, m, justify, align }) => css`
     display: flex;
+
+    ${!!align &&
+    css`
+      align-items: ${align};
+    `}
+
+    ${!!justify &&
+    css`
+      justify-content: ${justify};
+    `}
 
     ${!!m &&
     css`
