@@ -1,8 +1,24 @@
-import * as S from './styles'
+// import * as S from './styles'
 import { SpaProps } from '@/types/spa'
+import NavBar from '@/components/NavBar'
 
-const Template = (props: SpaProps) => {
-  return <S.Wrapper>{props?.about?.paragraph || 'hello word'}</S.Wrapper>
+import Home from './home'
+import About from './about'
+import Projects from './projects'
+
+type Props = {
+  page: SpaProps
 }
 
-export default Template
+const SinglePageApplication = ({ page }: Props) => {
+  return (
+    <main>
+      <NavBar {...page.navbar} dark />
+      <Home {...page.home} />
+      <About {...page.about} />
+      <Projects projects={page.projects} />
+    </main>
+  )
+}
+
+export default SinglePageApplication
