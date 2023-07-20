@@ -32,7 +32,7 @@ export const getProject = (slug: string) => {
   })
 }
 
-export const updateOrCreatePage = (formValues: InputValue) => {
+export const updateOrCreatePage = (formValues: any) => {
   return {
     promise: new Promise((resolve, reject) => {
       // get page from the database
@@ -64,7 +64,10 @@ export const updateOrCreatePage = (formValues: InputValue) => {
             },
             navbar: {
               brand: formValues.navbarbrand as string,
-              img: imagesFileList ? uploadedImagePaths[0] : page.navbar.img
+              img:
+                imagesFileList.length > 0
+                  ? uploadedImagePaths[uploadedImagePaths.length - 1]
+                  : page.navbar.img
             },
             about: {
               title: formValues.abouttitle as string,
