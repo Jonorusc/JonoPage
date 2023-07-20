@@ -52,7 +52,14 @@ export const Flex = styled.div<{
   `};
 `
 
-export const GridCenter = styled.div`
-  display: grid;
-  place-items: center;
+export const GridCenter = styled.div<{ height?: string }>`
+  ${({ height }) => css`
+    display: grid;
+    place-items: center;
+
+    ${!!height &&
+    css`
+      height: ${height};
+    `}
+  `};
 `
