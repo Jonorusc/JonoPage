@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
 export const Wrapper = styled.nav<{ isDark?: boolean }>`
   ${({ theme, isDark }) => css`
@@ -94,21 +95,18 @@ export const Title = styled.h1`
 
 export const Menu = styled(Flex)<{ mobileViewPort?: boolean }>`
   ${({ theme, mobileViewPort }) => css`
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in;
     z-index: ${theme.layers.menu};
     /* mobile */
     @media screen and (max-width: 768px) {
       position: fixed;
       top: -100vh;
+      left: 50%;
+      transform: translate(-50%, 0);
       ${mobileViewPort &&
       css`
         top: calc(${theme.spacing.medium} + 6rem);
       `};
-    }
-    /* small mobile */
-    @media screen and (max-width: 320px) {
-      left: 50%;
-      transform: translate(-50%, 0);
     }
   `};
 `
@@ -122,15 +120,11 @@ export const MenuText = styled.span<{
     color: ${isActive ? theme.palette.lightGreen : theme.palette.grey};
     cursor: pointer;
     transition: color 0.2s ease-in-out;
+    position: relative;
 
     &:hover {
       color: ${theme.palette.lightGreen};
     }
-
-    ${isActive &&
-    css`
-      border-bottom: 2px solid ${theme.palette.lightGreen};
-    `};
 
     /* small mobile */
     @media screen and (max-width: 320px) {
@@ -140,6 +134,16 @@ export const MenuText = styled.span<{
 `
 
 // toggle button
+export const Underline = styled(motion.div)`
+  ${({ theme }) => css`
+    position: absolute;
+    bottom: -0.4rem;
+    left: 0;
+    right: 0;
+    height: 0.1rem;
+    background-color: ${theme.palette.lightGreen};
+  `};
+`
 
 export const TogglerLine = styled.div.attrs({ className: 'line' })``
 
@@ -147,8 +151,8 @@ export const TogglerButton = styled.button<{
   isActive: boolean
 }>`
   ${({ theme, isActive }) => css`
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     position: relative;
     cursor: pointer;
     display: none;
@@ -175,7 +179,7 @@ export const TogglerButton = styled.button<{
       top: 0;
       ${isActive &&
       css`
-        transform: translateY(1.5rem) rotate(50deg);
+        transform: translateY(1.4rem) rotate(50deg);
       `};
     }
 
@@ -201,7 +205,7 @@ export const TogglerButton = styled.button<{
       bottom: 0;
       ${isActive &&
       css`
-        transform: translateY(-1.8rem) rotate(-50deg);
+        transform: translateY(-1.4rem) rotate(-50deg);
       `};
     }
   `};
