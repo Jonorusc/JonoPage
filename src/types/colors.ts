@@ -2,6 +2,7 @@ export type Colors =
   | 'primary'
   | 'secondary'
   | 'green'
+  | 'blueGreen'
   | 'dark'
   | 'lightGreen'
   | 'grey'
