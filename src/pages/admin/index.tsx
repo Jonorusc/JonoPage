@@ -85,21 +85,17 @@ const Admin = (props: SpaProps) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  let projects = {}
+  const page: SpaProps = await getDocumentById('spa', 'page')
 
-  await getDocumentById('spa', 'page')
-    .then((page) => {
-      projects = page
-    })
-    .catch((error) => {
-      throw new Error(error)
-    })
+  if (!page) {
+    return {
+      notFound: true
+    }
+  }
 
   return {
     revalidate: 5,
-    props: {
-      ...projects
-    }
+    props: page
   }
 }
 
