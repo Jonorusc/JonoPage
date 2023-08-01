@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import * as S from './styles'
 import { NavBarProps } from '@/types/navbar'
 
-const menuTexts = ['Home', 'About', 'Projects', 'Contact']
+import { menuTexts, handleScroll, scrollTo } from './helpers'
 
 const NavBar = ({ img, brand, dark = false }: NavBarProps) => {
   const [isActiveToggler, setIsActiveToggler] = useState(false)
@@ -15,11 +15,20 @@ const NavBar = ({ img, brand, dark = false }: NavBarProps) => {
     const resizeHandler = () => {
       if (window.innerWidth > 768) setIsActiveToggler(false)
     }
-
+    // const cleanup = handleScroll(setIsActiveToggler)
     window.addEventListener('resize', resizeHandler)
 
-    return () => window.removeEventListener('resize', resizeHandler)
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+      // cleanup()
+    }
   }, [])
+
+  const handleClick = (text: string) => {
+    setSelectedMenu(text)
+    scrollTo(text)
+    setIsActiveToggler(false)
+  }
 
   return (
     <S.Wrapper isDark={dark}>
@@ -34,12 +43,11 @@ const NavBar = ({ img, brand, dark = false }: NavBarProps) => {
         {menuTexts.map((text, index) => (
           <S.MenuText
             key={index}
-            onClick={() => setSelectedMenu(text)}
+            onClick={() => handleClick(text)}
             isActive={selectedMenu === text}
           >
             {text}
             {selectedMenu === text && !isActiveToggler && (
-              // Animate underline when menu is selected and toggler is not active
               <S.Underline layoutId="underline" />
             )}
           </S.MenuText>

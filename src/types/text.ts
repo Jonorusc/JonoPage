@@ -6,6 +6,7 @@ export type TextProps = {
   size?: FontSizeTypes
   icon?: ReactElement | null
   iconposition?: 'left' | 'right'
+  align?: 'left' | 'center' | 'right'
   color: Colors
   bold?: boolean
   up?: boolean

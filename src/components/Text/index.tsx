@@ -9,6 +9,7 @@ const Text = React.memo(
     bold = false,
     icon = null,
     iconposition = 'left',
+    align = 'left',
     gap = '0.5rem',
     up = false,
     m = '',
@@ -30,6 +31,7 @@ const Text = React.memo(
         ml={ml}
         up={up ? up : undefined}
         bold={bold ? bold : undefined}
+        align={align}
       >
         {children ? (
           <S.Text dangerouslySetInnerHTML={{ __html: children }} />

@@ -98,7 +98,7 @@ export const getDocumentById = (
           resolve(document)
         } else {
           reject({
-            message: 'Document not found',
+            message: 'Document not found (GetDocumentById)',
             error: new Error('Document not found')
           })
         }

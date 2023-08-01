@@ -95,7 +95,7 @@ export const Title = styled.h1`
 
 export const Menu = styled(Flex)<{ mobileViewPort?: boolean }>`
   ${({ theme, mobileViewPort }) => css`
-    transition: all 0.5s ease-in;
+    transition: top 0.5s ease-in;
     z-index: ${theme.layers.menu};
     /* mobile */
     @media screen and (max-width: 768px) {
@@ -103,6 +103,16 @@ export const Menu = styled(Flex)<{ mobileViewPort?: boolean }>`
       top: -100vh;
       left: 50%;
       transform: translate(-50%, 0);
+      height: 40vh;
+      width: 100%;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background: linear-gradient(
+        266.21deg,
+        ${theme.palette.secondary} -73.69%,
+        ${theme.palette.darker} 62.14%
+      );
+      border-radius: ${theme.border.radius};
       ${mobileViewPort &&
       css`
         top: calc(${theme.spacing.medium} + 6rem);

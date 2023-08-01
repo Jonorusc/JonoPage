@@ -1,7 +1,15 @@
 import styled, { css } from 'styled-components'
 
-export const FlexColumn = styled.div<{ gap?: string; m?: string }>`
-  ${({ gap, m }) => css`
+export type FlexProps = {
+  gap?: string
+  m?: string
+  cssText?: string
+  justify?: string
+  align?: string
+}
+
+export const FlexColumn = styled.div<FlexProps>`
+  ${({ gap, m, cssText, align, justify }) => css`
     display: flex;
     flex-direction: column;
 
@@ -14,18 +22,27 @@ export const FlexColumn = styled.div<{ gap?: string; m?: string }>`
     css`
       gap: ${gap};
     `}
+
+    ${!!cssText &&
+    css`
+      ${cssText}
+    `}
+
+    ${!!align &&
+    css`
+      align-items: ${align};
+    `}
+
+    ${!!justify &&
+    css`
+      justify-content: ${justify};
+    `}
   `};
 `
 
-export const Flex = styled.div<{
-  gap?: string
-  m?: string
-  justify?: string
-  align?: string
-}>`
-  ${({ gap, m, justify, align }) => css`
+export const Flex = styled.div<FlexProps>`
+  ${({ gap, m, justify, align, cssText }) => css`
     display: flex;
-
     ${!!align &&
     css`
       align-items: ${align};
@@ -46,6 +63,10 @@ export const Flex = styled.div<{
       gap: ${gap};
     `}
 
+    ${!!cssText &&
+    css`
+      ${cssText}
+    `}
     @media screen and (max-width: 768px) {
       flex-direction: column;
     }

@@ -30,7 +30,11 @@ const Home = ({ brand, btnText }: HomeProps) => {
   )
 
   return (
-    <S.HomeWrapper ref={targetRef} style={{ background: backgroundColor }}>
+    <S.HomeWrapper
+      ref={targetRef}
+      style={{ background: backgroundColor }}
+      id="home"
+    >
       <Container>
         <GridCenter>
           <S.GradientText

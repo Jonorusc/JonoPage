@@ -11,7 +11,6 @@ const inputBaseStyles = css`
     /* Styles for InputBase */
     border: none;
     outline: none;
-    min-width: 30rem;
     max-width: 40rem;
     height: 4.5rem;
     color: ${theme.palette.darkenBlue};

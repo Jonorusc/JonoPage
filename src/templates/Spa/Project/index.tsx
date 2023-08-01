@@ -145,7 +145,7 @@ const ProjectDetails = ({ project }: ProjectProps) => {
         {/* when clicking on a carousel image */}
         {typeof window !== 'undefined'
           ? createPortal(
-              <S.AnimatedContainer>
+              <S.AnimatedContainer initial={false} mode="wait">
                 {modal ? (
                   <S.Portal onClick={handleCloseModal}>
                     <i>X</i>

@@ -26,9 +26,10 @@ const Projects = ({ projects }: Props) => {
   const [project, setProject] = useState(projects[0])
   const targetRef = useRef(null)
   const wheelTargetRef = useRef<HTMLDivElement | null>(null)
+  // framer motion
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ['start end', 'end end']
+    offset: ['start end', 'end start']
   })
 
   const springConfig = {
@@ -37,14 +38,14 @@ const Projects = ({ projects }: Props) => {
   }
 
   const scale = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0, 1]),
+    useTransform(scrollYProgress, [0, 0.3], [0, 1]),
     springConfig
   )
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.75, 1], [0, 1, 1, 0])
 
   const projectsYaxis = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [200, 80]),
+    useTransform(scrollYProgress, [0, 0.4, 0.75, 1], [200, 80, 80, -400]),
     springConfig
   )
 
@@ -55,6 +56,7 @@ const Projects = ({ projects }: Props) => {
 
   const [deltaY, setDeltaY] = useState(0)
 
+  // go to the next or previous project
   const goToProject = (action: 'next' | 'prev') => {
     switch (action) {
       case 'next': {
@@ -107,8 +109,8 @@ const Projects = ({ projects }: Props) => {
 
     router.push(`/project/${slug}`, undefined, { shallow: true })
   }
-  // scroll position
 
+  // scroll position
   useEffect(() => {
     const scrollPosition = sessionStorage.getItem('scrollPosition')
 
@@ -118,10 +120,10 @@ const Projects = ({ projects }: Props) => {
   }, [])
 
   return (
-    <S.Wrapper ref={targetRef} height="100vh" cssText="position: relative;">
+    <S.Wrapper ref={targetRef} height="110vh" id="projects">
       <S.Div
         style={{
-          position: 'fixed',
+          position: 'relative',
           top: '15%',
           scale,
           width: '100%',
@@ -134,7 +136,7 @@ const Projects = ({ projects }: Props) => {
             <Text size="large" color="secondary">
               Latest Projects
             </Text>
-            <Text size="medium" color="darker" mt="1rem">
+            <Text size="medium" color="darker" mt="1rem" align="center">
               Check out some projects i’ve done
             </Text>
             <Text size="small" color="darker" mt="1rem">
@@ -159,7 +161,7 @@ const Projects = ({ projects }: Props) => {
                   // opacity: { duration: 0.2 }
                 }}
                 exit={{
-                  y: deltaY > 0 ? -40 : 40
+                  y: deltaY > 0 ? 40 : -40
                   // opacity: 0
                 }}
                 src={project.img[0]}

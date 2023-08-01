@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { CarouselItem } from '@/templates/Admin/Contents/styles'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Container } from '@/components/Container'
 
 export const Wrapper = styled.main`
   ${({ theme }) => css`
@@ -12,6 +13,14 @@ export const Wrapper = styled.main`
     a {
       text-decoration: none;
     }
+
+    /* container */
+    ${Container} {
+      /* when view is mobile */
+      @media screen and (max-width: 768px) {
+        padding: 4rem 0.3rem;
+      }
+    }
   `};
 `
 
@@ -20,6 +29,10 @@ export const Content = styled.section`
     margin-top: 4rem;
     .react-multi-carousel-list {
       padding: ${theme.spacing.medium};
+    }
+
+    .react-multiple-carousel__arrow {
+      z-index: ${theme.layers.overlay};
     }
 
     ${CarouselItem} {
@@ -386,6 +399,8 @@ export const Portal = styled(motion.button).attrs({
       text-transform: uppercases;
       font-style: normal;
       font-size: ${theme.font.size.medium};
+      z-index: ${theme.layers.alwaysOnTop};
+      filter: drop-shadow(0 0 0.5rem ${theme.palette.black});
     }
 
     img {
@@ -420,6 +435,7 @@ export const Buttons = styled.div<{ visible: boolean }>`
     svg {
       cursor: pointer;
       transition: all 0.3s ease-in-out;
+      filter: drop-shadow(0 0 0.5rem ${theme.palette.black});
 
       &:hover {
         color: ${theme.palette.primary};

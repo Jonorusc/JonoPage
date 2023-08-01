@@ -70,7 +70,7 @@ const LoginPage = ({ title, onSubmit }: LoginPageProps) => {
       <S.FlexColumn>
         {user ? (
           <>
-            <Text size="large" color="darker">
+            <Text size="large" color="darker" align="center">
               You're already logged in
             </Text>
             <Button
@@ -83,7 +83,7 @@ const LoginPage = ({ title, onSubmit }: LoginPageProps) => {
           </>
         ) : (
           <>
-            <Text size="large" color="darker">
+            <Text size="large" color="darker" align="center">
               {title}
             </Text>
             {/* <S.Emoji>😚</S.Emoji> */}

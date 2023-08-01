@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 import { Colors } from '@/types/colors'
+import { Input } from '@/components/Input/styles'
+import { FlexColumn, Flex } from '@/components/Flex'
+import { Wrapper as Button } from '@/components/Button/styles'
+import { Wrapper as TagInput } from '@/components/TagsInput/styles'
 
 export const backgroundGradient = `
   radial-gradient(
@@ -19,13 +23,80 @@ export const Wrapper = styled(motion.section)<{
     background-color: ${background
       ? theme.palette[background]
       : theme.bodyColor};
+
     color: ${theme.palette.whiteSmoke};
     transition: all 0.5s ease-in-out;
     height: ${height || '100vh'};
+    user-select: none;
+    width: 100%;
+
     ${!!cssText &&
     css`
       ${cssText}
     `};
+
+    textarea {
+      background: #d9d9d9;
+      color: rgba(20, 28, 34, 0.6);
+      max-width: unset;
+      width: 100%;
+      padding-left: 3rem;
+      &::placeholder {
+        color: rgba(20, 28, 34, 0.6);
+      }
+      overflow: hidden;
+    }
+
+    ${Flex} {
+      justify-content: space-between;
+    }
+
+    ${Input} {
+      border-radius: 3rem;
+      background: #d9d9d9;
+      color: rgba(20, 28, 34, 0.6);
+      max-width: 35rem;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        max-width: unset;
+      }
+      box-sizing: border-box;
+      padding: 3rem 2rem;
+      &::placeholder {
+        color: rgba(20, 28, 34, 0.6);
+      }
+    }
+
+    ${FlexColumn} {
+      max-width: 700px;
+      width: 100%;
+      /* @media screen and (max-width: 768px) {
+        padding: 0 ${theme.spacing.small};
+      } */
+    }
+
+    ${Button} {
+      padding: 3rem;
+    }
+
+    ${TagInput} {
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+
+    form {
+      button[type='submit'] {
+        width: 100%;
+        justify-content: center;
+        column-gap: 0;
+      }
+    }
+
+    /* mobile */
+    @media screen and (max-width: 768px) {
+      margin-bottom: 5rem;
+    }
   `};
 `
 
@@ -109,6 +180,12 @@ export const GradientText = styled(motion.h1).attrs({
         );
       }
     }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      padding-right: 0.1rem;
+      padding-left: 0.1rem;
+    }
   `};
 `
 
@@ -191,6 +268,7 @@ export const Brazil = styled(motion.img).attrs({
   alt: 'Brazil'
 })`
   filter: drop-shadow(5px 5px 5px #222);
+  position: relative;
 `
 
 export const Pin = styled(motion.img).attrs({
@@ -209,6 +287,9 @@ export const ProjectsWrapper = styled(motion.div)`
   ${({ theme }) => css`
     /* mobiel */
     width: min(50%, 100%);
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
     height: 45vh;
     margin: 0 auto;
     position: relative;
@@ -259,6 +340,11 @@ export const See = styled(motion.div)`
     background: rgba(20, 28, 34, 0.45);
     font-size: ${theme.font.size.medium};
 
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      border-radius: 3rem;
+    }
+
     a {
       text-decoration: none;
       color: inherit;
@@ -273,6 +359,9 @@ export const See = styled(motion.div)`
 export const Description = styled(motion.p)`
   ${({ theme }) => css`
     width: 65.1rem;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
     height: 7.9rem;
     color: ${theme.palette.dark};
     text-align: center;
@@ -283,3 +372,5 @@ export const Description = styled(motion.p)`
     position: relative;
   `};
 `
+
+// footer

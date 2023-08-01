@@ -38,6 +38,12 @@ export const Tag = styled.div<{ link: boolean }>`
 
     span {
       line-height: 1rem;
+      font-size: ${theme.font.size.medium};
+    }
+
+    svg {
+      width: ${theme.spacing.large};
+      height: ${theme.spacing.large};
     }
 
     div {
