@@ -2,11 +2,11 @@ import * as S from './styles'
 
 import { defaultTheme } from '@/components/themes/defaultTheme'
 import { Container } from '@/components/Container'
-import { GridCenter } from '@/components/Flex'
+import { FlexColumn } from '@/components/Flex'
 
 import { HomeProps } from '@/types/spa'
 
-import { useScroll, useTransform } from 'framer-motion'
+import { useScroll, useTransform, motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
@@ -36,13 +36,28 @@ const Home = ({ brand, btnText }: HomeProps) => {
       id="home"
     >
       <Container>
-        <GridCenter>
-          <S.GradientText
-            dangerouslySetInnerHTML={brandHTML}
-            style={{ y, opacity: opacityText }}
+        <FlexColumn cssText="position: relative;">
+          <motion.img
+            src="/images/ooorganize.svg"
+            alt="dots"
+            style={{ y: y, scale: scale, opacity: opacityBtn }}
           />
-          <S.Btn style={{ opacity: opacityBtn, y, scale }}>{btnText}</S.Btn>
-        </GridCenter>
+          <S.Resume
+            style={{ y, opacity: opacityBtn }}
+            whileTap={{
+              scale: 0.9
+            }}
+          >
+            Download my resume
+          </S.Resume>
+          <S.HomeBrand>
+            <S.GradientText
+              dangerouslySetInnerHTML={brandHTML}
+              style={{ y, opacity: opacityText }}
+            />
+            <S.Btn style={{ opacity: opacityBtn, y, scale }}>{btnText}</S.Btn>
+          </S.HomeBrand>
+        </FlexColumn>
       </Container>
     </S.HomeWrapper>
   )

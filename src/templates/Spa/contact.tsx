@@ -1,17 +1,21 @@
-import { Container } from '@/components/Container'
 import * as S from './styles'
+
+import { Container } from '@/components/Container'
 import { Flex, FlexColumn } from '@/components/Flex'
 import Text from '@/components/Text'
 import Input from '@/components/Input'
-// import Button from '@/components/Button'
 import Form from '@/components/Form'
 import Notify from '@/components/Notify'
 
-import { useScroll, useTransform } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useAnimation, useInView } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import { createDocument } from '@/firebase/crud'
 
-import { InputValue, FormEvent, FormErrorCallbackFunction } from '@/types/form'
+import type {
+  InputValue,
+  FormEvent,
+  FormErrorCallbackFunction
+} from '@/types/form'
 
 const Contact = () => {
   const [notify, setNotify] = useState({
@@ -20,14 +24,15 @@ const Contact = () => {
     error: false
   })
   const targetRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start end', 'end start']
-  })
+  const isInView = useInView(targetRef)
+  const wrapperControls = useAnimation()
 
-  const opacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
-  const scale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 1.06])
-  const y = useTransform(scrollYProgress, [0, 0.1], [200, 0])
+  useEffect(() => {
+    if (isInView) {
+      wrapperControls.start('visible')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInView])
 
   const onError: FormErrorCallbackFunction = () => {
     setNotify({
@@ -55,10 +60,16 @@ const Contact = () => {
   return (
     <S.Wrapper
       ref={targetRef}
-      cssText="position: relative; width: 100%; margin-top: 20rem;"
+      cssText="position: relative; width: 100%; margin-top: 20rem; background-image: url('/images/bbburst.svg');"
       height="100vh"
-      style={{ scale, y, opacity }}
       id="contact"
+      variants={{
+        hidden: { opacity: 0, scale: 0.8, y: 75 },
+        visible: { opacity: 1, scale: 1, y: 0 }
+      }}
+      initial="hidden"
+      animate={wrapperControls}
+      transition={{ duration: 0.5, deley: 0.25 }}
     >
       <Container>
         <FlexColumn align="center" cssText="margin: 0 auto;">

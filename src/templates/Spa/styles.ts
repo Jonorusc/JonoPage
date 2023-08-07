@@ -114,8 +114,15 @@ export const HomeWrapper = styled(motion.section)`
     mask-repeat: none;
     -webkit-mask-repeat: none;
     transition: all 0.5 ease-in;
-
     animation: dye 1.3s steps(20) forwards;
+
+    img {
+      position: absolute;
+      top: 12rem;
+      right: 20rem;
+      width: 40rem;
+    }
+
     @keyframes dye {
       0% {
         mask-position: 3% -100px;
@@ -143,9 +150,7 @@ export const GradientText = styled(motion.h1).attrs({
   }
 })`
   ${({ theme }) => css`
-    position: fixed;
-    top: 10%;
-    text-align: center;
+    text-align: left;
     font-size: ${theme.font.size.xlarge};
     font-style: normal;
     width: min(52.1rem, 100%);
@@ -185,6 +190,7 @@ export const GradientText = styled(motion.h1).attrs({
       width: 100%;
       padding-right: 0.1rem;
       padding-left: 0.1rem;
+      padding-top: 16rem;
     }
   `};
 `
@@ -202,8 +208,6 @@ export const Btn = styled(motion.div).attrs({
   }
 })`
   ${({ theme }) => css`
-    position: fixed;
-    top: 80%;
     width: 17.9rem;
     height: 5.5rem;
     border-radius: 3rem;
@@ -217,6 +221,79 @@ export const Btn = styled(motion.div).attrs({
     user-select: none;
   `};
 `
+
+export const HomeBrand = styled(motion.div)`
+  ${() => css`
+    position: absolute;
+    top: 8%;
+    left: 20rem;
+    @media screen and (max-width: 768px) {
+      margin-top: 3rem;
+      left: 0;
+    }
+    @media (min-width: 992px) and (max-width: 1199px) {
+      left: 5rem;
+    }
+    @media (min-width: 769px) and (max-width: 991px) {
+      left: 5rem;
+    }
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+  `};
+`
+
+export const Resume = styled(motion.div).attrs({
+  animate: {
+    scale: [0, 0.9, 1],
+    transition: {
+      type: 'spring',
+      stiffness: 200,
+      damping: 12,
+      duration: 1,
+      delay: 1.2
+    }
+  }
+})`
+  ${({ theme }) => css`
+    background-color: ${theme.palette.darker};
+    width: 4rem;
+    height: 40rem;
+    position: absolute;
+    top: 12rem;
+    right: 20rem;
+    @media screen and (max-width: 768px) {
+      left 0;
+      right: unset;
+      writing-mode: unset;
+      width: auto;
+      padding: 0 2rem;
+      height: 4rem;
+    }
+
+    @media (min-width: 992px)  and (max-width: 1199px) {
+      right: 4.5rem;
+    }
+    @media (min-width: 769px)  and (max-width: 991px) {
+      right: 4.5rem;
+    }
+    border-radius: ${theme.border.radius};
+    display: grid;
+    place-items: center;
+    color: ${theme.palette.whiteSmoke};
+    writing-mode: vertical-rl;
+    font-size: ${theme.font.size.small};
+    font-weight: ${theme.font.bold};
+    z-index: ${theme.layers.alwaysOnTop};
+    transition: background-color 0.5s ease-in-out;
+    user-select: none;
+    &:hover {
+      background-color: ${theme.palette.green};
+      cursor: pointer;
+    }
+  `};
+`
+
 export const Text = styled(motion.p)`
   ${({ theme }) => css`
     color: ${theme.palette.whiteSmoke};
@@ -226,16 +303,19 @@ export const Text = styled(motion.p)`
     line-height: normal;
     position: fixed;
     top: 50%;
+    left: 50%;
+    width: 100%;
     user-select: none;
 
     @media screen and (max-width: 768px) {
       font-size: 4rem;
-      top: 20%;
+      top: 30%;
     }
 
     @media screen and (max-width: 475px) {
       font-size: 3rem;
       top: 30%;
+      left: 50%;
     }
 
     span {

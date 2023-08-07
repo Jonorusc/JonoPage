@@ -120,7 +120,12 @@ const Projects = ({ projects }: Props) => {
   }, [])
 
   return (
-    <S.Wrapper ref={targetRef} height="110vh" id="projects">
+    <S.Wrapper
+      ref={targetRef}
+      height="110vh"
+      id="projects"
+      cssText='background-image: url("/images/bbblurry.svg");'
+    >
       <S.Div
         style={{
           position: 'relative',

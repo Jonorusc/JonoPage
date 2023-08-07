@@ -13,6 +13,7 @@ import { useLocalStorage } from 'usehooks-ts'
 const About = ({ title, paragraph }: AboutProps) => {
   const [theme] = useLocalStorage('theme', defaultTheme)
   const paragraphHTML = { __html: paragraph }
+  const titleHTML = { __html: title }
   const targetRef = useRef(null)
   // const springConfig = {
   //   stiffness: 400,
@@ -64,15 +65,16 @@ const About = ({ title, paragraph }: AboutProps) => {
             style={{
               scale: scaleTitle,
               opacity: opacityTitle,
-              y: yTitle
+              y: yTitle,
+              x: '-50%'
             }}
-          >
-            {title}
-          </S.Text>
+            dangerouslySetInnerHTML={titleHTML}
+          />
           <S.Text
             style={{
               scale: scaleParagraph,
               y: yParagraph,
+              x: '-50%',
               opacity: opacityParagraph
             }}
             dangerouslySetInnerHTML={paragraphHTML}
