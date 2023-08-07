@@ -73,14 +73,19 @@ export const Flex = styled.div<FlexProps>`
   `};
 `
 
-export const GridCenter = styled.div<{ height?: string }>`
-  ${({ height }) => css`
+export const GridCenter = styled.div<{ height?: string; cssText?: string }>`
+  ${({ height, cssText }) => css`
     display: grid;
     place-items: center;
 
     ${!!height &&
     css`
       height: ${height};
+    `}
+
+    ${!!cssText &&
+    css`
+      ${cssText}
     `}
   `};
 `
