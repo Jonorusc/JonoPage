@@ -18,8 +18,7 @@ export const handleScroll = (setActiveMenuItem: any) => {
       if (entry.isIntersecting) {
         const capitalizedId =
           entry.target.id.charAt(0).toUpperCase() + entry.target.id.slice(1)
-        // setActiveMenuItem(capitalizedId)
-        console.log(capitalizedId)
+        setActiveMenuItem(capitalizedId)
       }
     })
   }
@@ -33,7 +32,6 @@ export const handleScroll = (setActiveMenuItem: any) => {
   menuTexts.forEach((menuText) => {
     const section = document.getElementById(menuText.toLowerCase())
     if (section) {
-      console.log(section)
       observer.observe(section)
     }
   })

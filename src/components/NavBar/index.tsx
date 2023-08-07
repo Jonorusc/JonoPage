@@ -15,12 +15,12 @@ const NavBar = ({ img, brand, dark = false }: NavBarProps) => {
     const resizeHandler = () => {
       if (window.innerWidth > 768) setIsActiveToggler(false)
     }
-    // const cleanup = handleScroll(setIsActiveToggler)
+    const cleanup = handleScroll(setSelectedMenu)
     window.addEventListener('resize', resizeHandler)
 
     return () => {
       window.removeEventListener('resize', resizeHandler)
-      // cleanup()
+      cleanup()
     }
   }, [])
 
