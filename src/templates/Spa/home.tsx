@@ -42,12 +42,7 @@ const Home = ({ brand, btnText }: HomeProps) => {
             alt="dots"
             style={{ y: y, scale: scale, opacity: opacityBtn }}
           />
-          <S.Resume
-            style={{ y, opacity: opacityBtn }}
-            whileTap={{
-              scale: 0.9
-            }}
-          >
+          <S.Resume style={{ y, opacity: opacityBtn }}>
             Download my resume
           </S.Resume>
           <S.HomeBrand>
