@@ -24,6 +24,10 @@ const File = <T extends (event?: EventType, images?: ImageObject[]) => void>({
       reader.onload = (e) => {
         const imageURL = e.target?.result as string
         const imageObject: ImageObject = { url: imageURL, file }
+        // if file is a pdf set the `/images/pdfpath` as the image url
+        if (file.type === 'application/pdf')
+          imageObject.url = '/images/pdf.webp' //mutate the imageObject
+        // set the images state
         setImages((prevImages) => [...prevImages, imageObject])
       }
       reader.readAsDataURL(file)

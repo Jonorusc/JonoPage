@@ -285,11 +285,14 @@ export const Resume = styled(motion.div).attrs({
     font-size: ${theme.font.size.small};
     font-weight: ${theme.font.bold};
     z-index: ${theme.layers.alwaysOnTop};
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
     user-select: none;
     &:hover {
       background-color: ${theme.palette.green};
       cursor: pointer;
+    }
+    &:active {
+      background-color: ${theme.palette.lightGreen};
     }
   `};
 `

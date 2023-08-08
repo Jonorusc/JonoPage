@@ -56,11 +56,36 @@ export const updateOrCreatePage = (formValues: any) => {
             eventEmitter.emit('uploading', 'No image uploaded')
           }
 
+          // upload or update the resumes
+          eventEmitter.emit('uploading', 'Uploading resumes...')
+          const myresumeenglish = formValues.myresumeenglish as FileList
+          const myresumeptbr = formValues.myresumeptbr as FileList
+
+          // upload english resume
+          eventEmitter.emit('uploading', 'Uploading english resume...')
+          const [englishPath] = await uploadFilesToStorage(
+            myresumeenglish as FileList,
+            'resumes'
+          )
+
+          // upload portuguese resume
+          eventEmitter.emit('uploading', 'Uploading portuguese resume...')
+          const [portuguesePath] = await uploadFilesToStorage(
+            myresumeptbr as FileList,
+            'resumes'
+          )
+
+          const resumes = {
+            english: englishPath,
+            portuguese: portuguesePath
+          }
+
           // create the page object
           const spa: SpaProps = {
             home: {
               brand: formValues.homebrand as string,
-              btnText: formValues.homebtn as string
+              btnText: formValues.homebtn as string,
+              resumes
             },
             navbar: {
               brand: formValues.navbarbrand as string,

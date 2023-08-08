@@ -22,7 +22,17 @@ const Admin = (props: SpaProps) => {
     error: false
   })
 
+  const handleEvents = (type: string, message: string, error: boolean) => {
+    if (type === 'uploading') {
+      setLoading({ message, visible: true })
+    } else {
+      setLoading({ message, visible: false })
+      setNotify({ message, visible: true, error })
+    }
+  }
+
   const onSubmit = async (e: FormEvent, formValues: InputValue) => {
+    console.log(formValues)
     const upload = updateOrCreatePage(formValues)
 
     upload.on('uploading', (message: string) =>
@@ -35,15 +45,6 @@ const Admin = (props: SpaProps) => {
     upload.on('uploadsuccess', (message: string) => {
       handleEvents('uploadsuccess', message, false)
     })
-
-    const handleEvents = (type: string, message: string, error: boolean) => {
-      if (type === 'uploading') {
-        setLoading({ message, visible: true })
-      } else {
-        setLoading({ message, visible: false })
-        setNotify({ message, visible: true, error })
-      }
-    }
   }
 
   return (

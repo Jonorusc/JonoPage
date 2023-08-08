@@ -10,6 +10,10 @@ export type Project = {
 export type HomeProps = {
   brand: string
   btnText: string
+  resumes: {
+    english: string
+    portuguese: string
+  }
 }
 
 export type NavBar = {
