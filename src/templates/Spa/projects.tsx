@@ -197,9 +197,11 @@ const Projects = ({ projects }: Props) => {
               </GridCenter>
             </>
           ) : (
-            <Text size="medium" color="darker" mt="1rem" align="center">
-              No projects yet
-            </Text>
+            <GridCenter>
+              <Text size="medium" color="darker" mt="1rem" align="center">
+                No projects yet
+              </Text>
+            </GridCenter>
           )}
         </Container>
       </S.Div>
