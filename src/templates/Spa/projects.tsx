@@ -149,50 +149,58 @@ const Projects = ({ projects }: Props) => {
             </Text>
           </GridCenter>
           {/* projects */}
-          <S.ProjectsWrapper
-            ref={wheelTargetRef}
-            style={{ y: projectsYaxis, opacity, scale }}
-          >
-            <AnimatePresence initial={false} mode="wait">
-              <motion.img
-                key={project.slug}
-                initial={{ y: deltaY > 0 ? 40 : -40 }}
-                animate={{
-                  y: 0
-                  // opacity: 1
-                }}
-                transition={{
-                  y: { type: 'spring', stiffness: 300, damping: 30 }
-                  // opacity: { duration: 0.2 }
-                }}
-                exit={{
-                  y: deltaY > 0 ? 40 : -40
-                  // opacity: 0
-                }}
-                src={project.img[0]}
-                alt={project.description}
-                drag="y"
-                dragConstraints={{ top: 0, bottom: 0 }}
-                dragElastic={0.1}
-                onDragEnd={(e, { offset }) => {
-                  e.preventDefault()
-                  setDeltaY(offset.y)
-                  if (offset.y > 100) goToProject('next')
-                  else if (offset.y < -100) goToProject('prev')
-                }}
-              />
-            </AnimatePresence>
-            <S.See onClick={() => handleSeeProject(project.slug)}>
-              {/* <Link href={`/project/${project.slug}`}> */}
-              <FaGithub /> See Project
-              {/* </Link> */}
-            </S.See>
-          </S.ProjectsWrapper>
-          <GridCenter>
-            <S.Description style={{ y: descriptionYaxis, opacity }}>
-              {project.description}
-            </S.Description>
-          </GridCenter>
+          {projects.length > 0 ? (
+            <>
+              <S.ProjectsWrapper
+                ref={wheelTargetRef}
+                style={{ y: projectsYaxis, opacity, scale }}
+              >
+                <AnimatePresence initial={false} mode="wait">
+                  <motion.img
+                    key={project.slug}
+                    initial={{ y: deltaY > 0 ? 40 : -40 }}
+                    animate={{
+                      y: 0
+                      // opacity: 1
+                    }}
+                    transition={{
+                      y: { type: 'spring', stiffness: 300, damping: 30 }
+                      // opacity: { duration: 0.2 }
+                    }}
+                    exit={{
+                      y: deltaY > 0 ? 40 : -40
+                      // opacity: 0
+                    }}
+                    src={project.img[0]}
+                    alt={project.description}
+                    drag="y"
+                    dragConstraints={{ top: 0, bottom: 0 }}
+                    dragElastic={0.1}
+                    onDragEnd={(e, { offset }) => {
+                      e.preventDefault()
+                      setDeltaY(offset.y)
+                      if (offset.y > 100) goToProject('next')
+                      else if (offset.y < -100) goToProject('prev')
+                    }}
+                  />
+                </AnimatePresence>
+                <S.See onClick={() => handleSeeProject(project.slug)}>
+                  {/* <Link href={`/project/${project.slug}`}> */}
+                  <FaGithub /> See Project
+                  {/* </Link> */}
+                </S.See>
+              </S.ProjectsWrapper>
+              <GridCenter>
+                <S.Description style={{ y: descriptionYaxis, opacity }}>
+                  {project.description}
+                </S.Description>
+              </GridCenter>
+            </>
+          ) : (
+            <Text size="medium" color="darker" mt="1rem" align="center">
+              No projects yet
+            </Text>
+          )}
         </Container>
       </S.Div>
     </S.Wrapper>

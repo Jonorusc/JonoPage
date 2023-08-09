@@ -116,7 +116,7 @@ export const HomeWrapper = styled(motion.section)`
     transition: all 0.5 ease-in;
     animation: dye 1.3s steps(20) forwards;
 
-    img {
+    img[src$='/images/ooorganize.svg'] {
       position: absolute;
       top: 12rem;
       right: 20rem;
@@ -266,7 +266,7 @@ export const Resume = styled(motion.div).attrs({
       left 0;
       right: unset;
       writing-mode: unset;
-      width: auto;
+      width: fit-content;
       padding: 0 2rem;
       height: 4rem;
     }
@@ -285,7 +285,7 @@ export const Resume = styled(motion.div).attrs({
     font-size: ${theme.font.size.small};
     font-weight: ${theme.font.bold};
     z-index: ${theme.layers.alwaysOnTop};
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color, width 0.3s ease-in-out;
     user-select: none;
     &:hover {
       background-color: ${theme.palette.green};
@@ -455,5 +455,3 @@ export const Description = styled(motion.p)`
     position: relative;
   `};
 `
-
-// footer

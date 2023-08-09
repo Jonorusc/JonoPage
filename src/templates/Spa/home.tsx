@@ -3,14 +3,16 @@ import * as S from './styles'
 import { defaultTheme } from '@/components/themes/defaultTheme'
 import { Container } from '@/components/Container'
 import { FlexColumn } from '@/components/Flex'
+import DownloadCv from '@/components/DownloadCv'
 
 import { HomeProps } from '@/types/spa'
 
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
-const Home = ({ brand, btnText }: HomeProps) => {
+const Home = ({ brand, btnText, resumes }: HomeProps) => {
+  const [openResume, setOpenResume] = useState(false)
   const [theme] = useLocalStorage('theme', defaultTheme)
   const brandHTML = { __html: brand }
   const targetRef = useRef(null)
@@ -42,9 +44,14 @@ const Home = ({ brand, btnText }: HomeProps) => {
             alt="dots"
             style={{ y: y, scale: scale, opacity: opacityBtn }}
           />
-          <S.Resume style={{ y, opacity: opacityBtn }}>
+          <S.Resume
+            style={{ y, opacity: opacityBtn }}
+            onClick={() => setOpenResume(!openResume)}
+          >
             Download my resume
+            <DownloadCv resumes={resumes} open={openResume} />
           </S.Resume>
+
           <S.HomeBrand>
             <S.GradientText
               dangerouslySetInnerHTML={brandHTML}

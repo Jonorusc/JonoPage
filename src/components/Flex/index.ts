@@ -6,6 +6,7 @@ export type FlexProps = {
   cssText?: string
   justify?: string
   align?: string
+  keepFlex?: boolean
 }
 
 export const FlexColumn = styled.div<FlexProps>`
@@ -41,7 +42,7 @@ export const FlexColumn = styled.div<FlexProps>`
 `
 
 export const Flex = styled.div<FlexProps>`
-  ${({ gap, m, justify, align, cssText }) => css`
+  ${({ gap, m, justify, align, cssText, keepFlex }) => css`
     display: flex;
     ${!!align &&
     css`
@@ -68,7 +69,7 @@ export const Flex = styled.div<FlexProps>`
       ${cssText}
     `}
     @media screen and (max-width: 768px) {
-      flex-direction: column;
+      flex-direction: ${keepFlex ? 'row' : 'column'};
     }
   `};
 `
