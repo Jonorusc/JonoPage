@@ -46,11 +46,7 @@ const ProjectDetails = ({ project }: ProjectProps) => {
   }, [modal])
 
   const handleGoBack = () => {
-    if (router?.back) {
-      router.back()
-    } else {
-      router.push('/')
-    }
+    router.push('/')
   }
 
   const EventLeft = () => {
@@ -123,7 +119,7 @@ const ProjectDetails = ({ project }: ProjectProps) => {
         <Flex justify="space-between" align="center">
           <S.A onClick={handleGoBack}>
             <Text color="green" icon={<FaArrowLeft />} size="medium" gap="1rem">
-              Back
+              Back to landing page
             </Text>
           </S.A>
           <Link href={source ? source : `/project/${slug}`} target="_blank">
