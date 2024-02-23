@@ -312,7 +312,7 @@ export const Text = styled(motion.p)`
     }
 
     @media screen and (max-width: 475px) {
-      font-size: 3rem;
+      font-size: 2.3rem;
       top: 30%;
       left: 50%;
     }
