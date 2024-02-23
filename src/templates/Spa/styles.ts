@@ -357,8 +357,7 @@ export const Pin = styled(motion.img).attrs({
   filter: drop-shadow(5px 5px 5px #222);
 `
 
-export const Div = styled(motion.div)`
-`
+export const Div = styled(motion.div)``
 
 // projects
 export const ProjectsWrapper = styled(motion.div)`
