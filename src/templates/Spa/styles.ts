@@ -27,7 +27,6 @@ export const Wrapper = styled(motion.section)<{
     color: ${theme.palette.whiteSmoke};
     transition: all 0.5s ease-in-out;
     height: ${height || '100vh'};
-    user-select: none;
     width: 100%;
 
     ${!!cssText &&
@@ -158,7 +157,6 @@ export const GradientText = styled(motion.h1).attrs({
     font-weight: 700;
     line-height: normal;
     padding-top: 18rem;
-    user-select: none;
     color: ${theme.palette.darkenBlue};
     background-image: linear-gradient(
       202deg,
@@ -218,7 +216,6 @@ export const Btn = styled(motion.div).attrs({
     text-align: center;
     font-size: 2rem;
     font-weight: 700;
-    user-select: none;
   `};
 `
 
@@ -286,7 +283,6 @@ export const Resume = styled(motion.div).attrs({
     font-weight: ${theme.font.bold};
     z-index: ${theme.layers.alwaysOnTop};
     transition: background-color, width 0.3s ease-in-out;
-    user-select: none;
     &:hover {
       background-color: ${theme.palette.green};
       cursor: pointer;
@@ -362,7 +358,6 @@ export const Pin = styled(motion.img).attrs({
 `
 
 export const Div = styled(motion.div)`
-  user-select: none;
 `
 
 // projects
