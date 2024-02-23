@@ -36,7 +36,7 @@ const About = ({ title, paragraph }: AboutProps) => {
   const yParagraph = useTransform(
     scrollYProgress,
     [0.25, 0.33, 0.55, 0.8],
-    [0, -110, -150, -200]
+    [0, -110, -150, -220]
   )
   const opacityParagraph = useTransform(
     scrollYProgress,
